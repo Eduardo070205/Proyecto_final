@@ -35,13 +35,7 @@ public class VentanaLogin extends Elementos implements ActionListener {
 
         //Widgets
 
-        ImageIcon icono = new ImageIcon("./img/Hospital.png");
-
-        Image imagenAjustada = icono.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
-
-        ImageIcon iconoAjustado = new ImageIcon(imagenAjustada);
-
-        logo = new JLabel(iconoAjustado);
+        logo = new JLabel(asignarImagen("./img/Hospital.png", 150, 150));
 
         asignarPosicion(logo, 0,0,150,150);
 
