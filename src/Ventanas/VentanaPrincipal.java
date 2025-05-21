@@ -45,11 +45,13 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
     public  VentanaPrincipal(){
 
+        JDesktopPane desktopPaneInternals = new JDesktopPane();
+
         ButtonGroup bgSexo = new ButtonGroup();
 
         getContentPane().setLayout(null);
 
-        getContentPane().setBackground(Color.decode("#ffffff"));
+        getContentPane().setBackground(Color.decode("#737895"));
 
         setDefaultCloseOperation(HIDE_ON_CLOSE);
 
@@ -60,6 +62,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
         setLocationRelativeTo(null);
 
         setVisible(true);
+
+        desktopPaneInternals.setBackground(Color.decode("#e7eaf3"));
 
         JMenuBar barraMenu = new JMenuBar();
 
@@ -173,10 +177,13 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
                 if(radioClaro.isSelected()){
 
-                    getContentPane().setBackground(Color.decode("#ffffff"));
+                    getContentPane().setBackground(Color.decode("#737895"));
 
                     panelAltasDiseño.setBackground(Color.decode("#a3d1e3"));
 
+                    panelAltasPa.setBackground(Color.decode("#feffe9"));
+
+                    desktopPaneInternals.setBackground(Color.decode("#e7eaf3"));
 
                 }
 
@@ -188,6 +195,27 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
         JRadioButton radioOscuro = new JRadioButton("Oscuro");
 
         bgTema.add(radioOscuro);
+
+        radioOscuro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if(radioOscuro.isSelected()){
+
+                    getContentPane().setBackground(Color.decode("#4f536b"));
+
+                    panelAltasDiseño.setBackground(Color.decode("#4f6199"));
+
+                    panelAltasPa.setBackground(Color.decode("#959595"));
+
+                    desktopPaneInternals.setBackground(Color.decode("#737895"));
+
+
+
+                }
+
+            }
+        });
 
         agregarAlPanel(radioOscuro, panelAjustes, 100, 40, 100, 20);
 
@@ -210,7 +238,7 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         asignarPosicion(toolbar, 0, 0, 1200, 30);
 
-        JDesktopPane desktopPaneInternals = new JDesktopPane();
+
 
         internalAltasPa = new JInternalFrame();
 
@@ -225,6 +253,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
         panelAltasPa = new JPanel();
 
         panelAltasPa.setBounds(0,200,900, 800);
+
+        panelAltasPa.setBackground(Color.decode("#feffe9"));
 
         panelAltasPa.setLayout(null);
 
@@ -331,6 +361,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
         agregarAlPanel(txtMesNacPaciente, panelAltasPa, 100, 260, 30, 20);
 
         comboMesNacPaciente = new JComboBox<>();
+
+
 
         for(int i = 1; i <= 12; i++){
 

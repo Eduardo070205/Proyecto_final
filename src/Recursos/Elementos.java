@@ -7,6 +7,7 @@ import javax.swing.*;
 
 public class Elementos extends JFrame{
 
+
     ImageIcon icono;
 
     Image imagenAjustada;
@@ -33,6 +34,8 @@ public class Elementos extends JFrame{
 
     }
 
+
+
     public void caracteristicasInternal(JInternalFrame internal){
 
         internal.setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -51,6 +54,8 @@ public class Elementos extends JFrame{
     public void agregarAlPanel(JComponent component, JPanel panel,int x, int y, int w, int h) {
 
         component.setBounds(x, y, w, h);
+
+
 
         panel.add(component);
 

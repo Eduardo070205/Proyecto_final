@@ -21,7 +21,7 @@ public class VentanaLogin extends Elementos implements ActionListener {
 
         getContentPane().setLayout(null);
 
-        getContentPane().setBackground(Color.decode("#ffffff"));
+        getContentPane().setBackground(Color.decode("#737895"));
 
         setDefaultCloseOperation(HIDE_ON_CLOSE);
 
