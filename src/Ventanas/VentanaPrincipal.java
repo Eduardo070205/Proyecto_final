@@ -27,15 +27,19 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
     JButton btnAjustes, btnSesion, btnRecargar;
 
-    JTextField cajaNumPaciente, cajaNombrePaciente, cajaApePatPaciente, cajaApeMatPAciente, cajaCalleNumeroPaciente, cajaColoniaPaciente, cajaCPPaciente, cajaEstadoPaciente, cajaTelefono;
+    JTextField cajaNumPaciente, cajaNombrePaciente, cajaApePatPaciente, cajaApeMatPAciente, cajaCalleNumeroPaciente, cajaColoniaPaciente, cajaCPPaciente, cajaEstadoPaciente, cajaTelefonoPaciente;
 
     JComboBox<Short> comboDiaNacPaciente, comboMesNacPaciente, comboAñoNacPaciente, comboDiaIngrPaciente, comboMesIngrPaciente, comboAñoIngrPaciente;
 
-    JComboBox<String>comboSexoPaciente, comboEstadoCivilPaciente;
+    JComboBox<String> comboEstadoCivilPaciente;
+
+    JRadioButton radioHombre, radioMujer, radioNoBinario;
 
     JPanel panelAltasPa;
 
     public  VentanaPrincipal(){
+
+        ButtonGroup bgSexo = new ButtonGroup();
 
         getContentPane().setLayout(null);
 
@@ -225,6 +229,95 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
         cajaEstadoPaciente = new JTextField();
 
         agregarAlPanel(cajaEstadoPaciente, panelAltasPa, 730, 80, 100, 20);
+
+        JLabel txtTelefonoPacientes = new JLabel("Telefono:");
+
+        agregarAlPanel(txtTelefonoPacientes, panelAltasPa, 10, 110, 60, 20);
+
+        cajaTelefonoPaciente = new JTextField();
+
+        agregarAlPanel(cajaTelefonoPaciente, panelAltasPa, 70, 110, 100, 20);
+
+        JLabel txtxFechaNacPaciente = new JLabel("Fecha de nacimiento");
+
+        agregarAlPanel(txtxFechaNacPaciente, panelAltasPa, 10, 140, 120, 20);
+
+        JLabel txtDiaNacPaciente = new JLabel("Dia:");
+
+        agregarAlPanel(txtDiaNacPaciente, panelAltasPa, 10, 160, 30, 20);
+
+        comboDiaNacPaciente = new JComboBox<>();
+
+        for(int i = 1; i <= 30; i++){
+
+            comboDiaNacPaciente.addItem((short)i);
+
+        }
+
+        agregarAlPanel(comboDiaNacPaciente, panelAltasPa, 40, 160, 50, 20);
+
+        JLabel txtMesNacPaciente = new JLabel("Mes:");
+
+        agregarAlPanel(txtMesNacPaciente, panelAltasPa, 100, 160, 30, 20);
+
+        comboMesNacPaciente = new JComboBox<>();
+
+        for(int i = 1; i <= 12; i++){
+
+            comboMesNacPaciente.addItem((short)i);
+
+        }
+
+        agregarAlPanel(comboMesNacPaciente, panelAltasPa, 130, 160, 50, 20);
+
+        JLabel txtAñoNacPaciente = new JLabel("Año:");
+
+        agregarAlPanel(txtAñoNacPaciente, panelAltasPa, 190, 160, 30, 20);
+
+        comboAñoNacPaciente = new JComboBox<>();
+
+        for(int i = 2025; i >= 1900; i--){
+
+            comboAñoNacPaciente.addItem((short)i);
+
+        }
+
+        agregarAlPanel(comboAñoNacPaciente, panelAltasPa, 220, 160, 70, 20);
+
+        JLabel txtSexoPaciente = new JLabel("Sexo:");
+
+        agregarAlPanel(txtSexoPaciente, panelAltasPa, 10, 190, 40, 20);
+
+        radioHombre = new JRadioButton("Hombre");
+
+        bgSexo.add(radioHombre);
+
+        agregarAlPanel(radioHombre, panelAltasPa, 50, 190, 80, 20);
+
+        radioMujer = new JRadioButton("Mujer");
+
+        bgSexo.add(radioMujer);
+
+        agregarAlPanel(radioMujer, panelAltasPa, 130, 190, 80, 20);
+
+        radioNoBinario = new JRadioButton("No Binario");
+
+        bgSexo.add(radioNoBinario);
+
+        agregarAlPanel(radioNoBinario, panelAltasPa, 210, 190, 100, 20);
+
+        JLabel txtEstadoCivil = new JLabel("Estado civil:");
+
+        agregarAlPanel(txtEstadoCivil, panelAltasPa, 10, 220, 100, 20);
+
+
+
+
+
+
+
+
+
 
 
         panelAltasPa.setBounds(0,0,900, 800);
