@@ -35,6 +35,8 @@ public class Elementos extends JFrame{
 
     public void caracteristicasInternal(JInternalFrame internal){
 
+        internal.setDefaultCloseOperation(HIDE_ON_CLOSE);
+
         internal.setClosable(true);
 
         internal.setMaximizable(true);
