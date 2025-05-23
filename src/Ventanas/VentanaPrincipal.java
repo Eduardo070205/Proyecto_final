@@ -66,12 +66,21 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
     JRadioButton radioHombreM, radioMujerM, radioNoBinarioM;
 
 
-    //========================================= Cambios ==========================================
+    //========================================= CONSULTAS ==========================================
 
+    JButton btnBuscarC, btnRestaurarC, btnCancelarC;
+
+    JTextField cajaNumPacienteC, cajaNombrePacienteC, cajaApePatPacienteC, cajaApeMatPAcienteC, cajaCalleNumeroPacienteC, cajaColoniaPacienteC, cajaCPPacienteC, cajaEstadoPacienteC, cajaTelefonoPacienteC;
+
+    JComboBox<Short> comboDiaNacPacienteC, comboMesNacPacienteC, comboAñoNacPacienteC, comboDiaIngrPacienteC, comboMesIngrPacienteC, comboAñoIngrPacienteC;
+
+    JComboBox<String> comboEstadoCivilPacienteC;
+
+    JRadioButton radioHombreC, radioMujerC, radioNoBinarioC;
 
     //=============================================================================================
 
-    JPanel panelAltasPa, panelBajasPa, panelModificacionesPa;
+    JPanel panelAltasPa, panelBajasPa, panelModificacionesPa, panelConsultasPa;
 
     ButtonGroup bgSexo = new ButtonGroup();
 
@@ -79,11 +88,15 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
     ButtonGroup bgSexoM = new ButtonGroup();
 
+    ButtonGroup bgSexoC = new ButtonGroup();
+
     JPanel panelAltasDiseño = new JPanel();
 
     JPanel panelBajasDiseño = new JPanel();
 
     JPanel panelModificacionesDiseño = new JPanel();
+
+    JPanel panelConsultasDiseño = new JPanel();
 
     public  VentanaPrincipal(){
 
@@ -130,6 +143,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
         menuPacientes.add(cambiosPacientes);
 
         consultasPacientes = new JMenuItem("Buscar");
+
+        consultasPacientes.addActionListener(this);
 
         menuPacientes.add(consultasPacientes);
 
@@ -227,6 +242,18 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
                     panelAltasPa.setBackground(Color.decode("#feffe9"));
 
+                    panelBajasDiseño.setBackground(Color.decode("#a3d1e3"));
+
+                    panelBajasPa.setBackground(Color.decode("#feffe9"));
+
+                    panelModificacionesDiseño.setBackground(Color.decode("#a3d1e3"));
+
+                    panelModificacionesPa.setBackground(Color.decode("#feffe9"));
+
+                    panelConsultasDiseño.setBackground(Color.decode("#a3d1e3"));
+
+                    panelConsultasPa.setBackground(Color.decode("#feffe9"));
+
                     desktopPaneInternals.setBackground(Color.decode("#e7eaf3"));
 
                 }
@@ -248,9 +275,23 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
                     getContentPane().setBackground(Color.decode("#4f536b"));
 
+                    toolbar.setBackground(Color.decode("#4f536b"));
+
                     panelAltasDiseño.setBackground(Color.decode("#4f6199"));
 
                     panelAltasPa.setBackground(Color.decode("#959595"));
+
+                    panelBajasDiseño.setBackground(Color.decode("#4f6199"));
+
+                    panelBajasPa.setBackground(Color.decode("#959595"));
+
+                    panelModificacionesDiseño.setBackground(Color.decode("#4f6199"));
+
+                    panelModificacionesPa.setBackground(Color.decode("#959595"));
+
+                    panelConsultasDiseño.setBackground(Color.decode("#4f6199"));
+
+                    panelConsultasPa.setBackground(Color.decode("#959595"));
 
                     desktopPaneInternals.setBackground(Color.decode("#737895"));
 
@@ -1114,9 +1155,276 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         caracteristicasInternal(internalCambiosPa);
 
+
+        //======================================================== CONSULTAS =============================
+
+
+        panelConsultasDiseño.setLayout(null);
+
+        panelConsultasDiseño.setBounds(0,0,900, 200);
+
+        panelConsultasDiseño.setBackground(Color.decode("#a3d1e3"));
+
+        panelConsultasPa = new JPanel();
+
+        panelConsultasPa.setBounds(0,200,900, 800);
+
+        panelConsultasPa.setBackground(Color.decode("#feffe9"));
+
+        panelConsultasPa.setLayout(null);
+
+        JLabel txtTituloC = new JLabel("Buscar un Paciente");
+
+        txtTituloC.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 20));
+
+        agregarAlPanel(txtTituloC, panelConsultasDiseño, 50, 40, 200, 40);
+
+        agregarAlPanel(panelConsultasDiseño, panelConsultasPa, 0,0,900,100);
+
+        JLabel txtNumPacienteC = new JLabel("Numero de Paciente:");
+
+        agregarAlPanel(txtNumPacienteC, panelConsultasPa, 10, 120, 150, 20);
+
+        cajaNumPacienteC = new JTextField();
+
+        agregarAlPanel(cajaNumPacienteC, panelConsultasPa,160, 120, 100, 20);
+
+        JLabel txtNombrePacienteC = new JLabel("Nombre:");
+
+        agregarAlPanel(txtNombrePacienteC, panelConsultasPa, 10, 150, 60, 20);
+
+        cajaNombrePacienteC = new JTextField();
+
+        agregarAlPanel(cajaNombrePacienteC, panelConsultasPa, 70, 150, 150, 20);
+
+        JLabel txtApePatPacienteC = new JLabel("Apellido Paterno:");
+
+        agregarAlPanel(txtApePatPacienteC, panelConsultasPa, 220, 150, 100, 20);
+
+        cajaApePatPacienteC = new JTextField();
+
+        agregarAlPanel(cajaApePatPacienteC, panelConsultasPa, 320, 150, 150, 20);
+
+        JLabel txtApeMatPacienteC = new JLabel("Apellido Materno:");
+
+        agregarAlPanel(txtApeMatPacienteC, panelConsultasPa, 480, 150, 100, 20);
+
+        cajaApeMatPAcienteC = new JTextField();
+
+        agregarAlPanel(cajaApeMatPAcienteC, panelConsultasPa, 580, 150, 150, 20);
+
+        JLabel txtCallePacienteC = new JLabel("Calle y Número del Paciente:");
+
+        agregarAlPanel(txtCallePacienteC, panelConsultasPa, 10, 180, 170, 20);
+
+        cajaCalleNumeroPacienteC = new JTextField();
+
+        agregarAlPanel(cajaCalleNumeroPacienteC, panelConsultasPa, 180, 180, 150, 20);
+
+        JLabel txtColoniaPacienteC = new JLabel("Colonia:");
+
+        agregarAlPanel(txtColoniaPacienteC, panelConsultasPa, 340, 180, 60, 20);
+
+        cajaColoniaPacienteC = new JTextField();
+
+        agregarAlPanel(cajaColoniaPacienteC, panelConsultasPa, 400, 180, 100, 20);
+
+        JLabel txtxCPPacienteC = new JLabel("Código Postal:");
+
+        agregarAlPanel(txtxCPPacienteC, panelConsultasPa, 510, 180, 100, 20);
+
+        cajaCPPacienteC = new JTextField();
+
+        agregarAlPanel(cajaCPPacienteC, panelConsultasPa, 610, 180, 50, 20);
+
+        JLabel txtEstadoPacienteC = new JLabel("Estado:");
+
+        agregarAlPanel(txtEstadoPacienteC, panelConsultasPa, 670, 180, 60, 20);
+
+        cajaEstadoPacienteC = new JTextField();
+
+        agregarAlPanel(cajaEstadoPacienteC, panelConsultasPa, 730, 180, 100, 20);
+
+        JLabel txtTelefonoPacientesC = new JLabel("Telefono:");
+
+        agregarAlPanel(txtTelefonoPacientesC, panelConsultasPa, 10, 210, 60, 20);
+
+        cajaTelefonoPacienteC = new JTextField();
+
+        agregarAlPanel(cajaTelefonoPacienteC, panelConsultasPa, 70, 210, 100, 20);
+
+        JLabel txtxFechaNacPacienteC = new JLabel("Fecha de nacimiento");
+
+        agregarAlPanel(txtxFechaNacPacienteC, panelConsultasPa, 10, 240, 120, 20);
+
+        JLabel txtDiaNacPacienteC = new JLabel("Dia:");
+
+        agregarAlPanel(txtDiaNacPacienteC, panelConsultasPa, 10, 260, 30, 20);
+
+        comboDiaNacPacienteC = new JComboBox<>();
+
+        for(int i = 1; i <= 30; i++){
+
+            comboDiaNacPacienteC.addItem((short)i);
+
+        }
+
+        agregarAlPanel(comboDiaNacPacienteC, panelConsultasPa, 40, 260, 50, 20);
+
+        JLabel txtMesNacPacienteC = new JLabel("Mes:");
+
+        agregarAlPanel(txtMesNacPacienteC, panelConsultasPa, 100, 260, 30, 20);
+
+        comboMesNacPacienteC = new JComboBox<>();
+
+
+
+        for(int i = 1; i <= 12; i++){
+
+            comboMesNacPacienteC.addItem((short)i);
+
+        }
+
+        agregarAlPanel(comboMesNacPacienteC, panelConsultasPa, 130, 260, 50, 20);
+
+        JLabel txtAñoNacPacienteC = new JLabel("Año:");
+
+        agregarAlPanel(txtAñoNacPacienteC, panelConsultasPa, 190, 260, 30, 20);
+
+        comboAñoNacPacienteC = new JComboBox<>();
+
+        for(int i = 2025; i >= 1900; i--){
+
+            comboAñoNacPacienteC.addItem((short)i);
+
+        }
+
+        agregarAlPanel(comboAñoNacPacienteC, panelConsultasPa, 220, 260, 70, 20);
+
+        JLabel txtSexoPacienteC = new JLabel("Sexo:");
+
+        agregarAlPanel(txtSexoPacienteC, panelConsultasPa, 10, 290, 40, 20);
+
+        radioHombreC = new JRadioButton("Hombre");
+
+        bgSexoC.add(radioHombreC);
+
+        agregarAlPanel(radioHombreC, panelConsultasPa, 50, 290, 80, 20);
+
+        radioMujerC = new JRadioButton("Mujer");
+
+        bgSexoC.add(radioMujerC);
+
+        agregarAlPanel(radioMujerC, panelConsultasPa, 130, 290, 80, 20);
+
+        radioNoBinarioC = new JRadioButton("No Binario");
+
+        bgSexoC.add(radioNoBinarioC);
+
+        agregarAlPanel(radioNoBinarioC, panelConsultasPa, 210, 290, 100, 20);
+
+        JLabel txtEstadoCivilC = new JLabel("Estado civil:");
+
+        agregarAlPanel(txtEstadoCivilC, panelConsultasPa, 10, 320, 100, 20);
+
+        comboEstadoCivilPacienteC = new JComboBox<>();
+
+        comboEstadoCivilPacienteC.addItem("Soltero");
+
+        comboEstadoCivilPacienteC.addItem("Casado");
+
+        comboEstadoCivilPacienteC.addItem("Viudo");
+
+        comboEstadoCivilPacienteC.addItem("Divorciado");
+
+        comboEstadoCivilPacienteC.addItem("Separado");
+
+        comboEstadoCivilPacienteC.addItem("Concubinato");
+
+        agregarAlPanel(comboEstadoCivilPacienteC, panelConsultasPa, 110, 320, 100, 20);
+
+        JLabel txtxFechaIngrPacienteC = new JLabel("Fecha de ingreso");
+
+        agregarAlPanel(txtxFechaIngrPacienteC, panelConsultasPa, 10, 350, 120, 20);
+
+        JLabel txtDiaIngrPacienteC = new JLabel("Dia:");
+
+        agregarAlPanel(txtDiaIngrPacienteC, panelConsultasPa, 10, 370, 30, 20);
+
+        comboDiaIngrPacienteC = new JComboBox<>();
+
+        for(int i = 1; i <= 30; i++){
+
+            comboDiaIngrPacienteC.addItem((short)i);
+
+        }
+
+        agregarAlPanel(comboDiaIngrPacienteC, panelConsultasPa, 40, 370, 50, 20);
+
+        JLabel txtMesIngrPacienteC = new JLabel("Mes:");
+
+        agregarAlPanel(txtMesIngrPacienteC, panelConsultasPa, 100, 370, 30, 20);
+
+        comboMesIngrPacienteC = new JComboBox<>();
+
+        for(int i = 1; i <= 12; i++){
+
+            comboMesIngrPacienteC.addItem((short)i);
+
+        }
+
+        agregarAlPanel(comboMesIngrPacienteC, panelConsultasPa, 130, 370, 50, 20);
+
+        JLabel txtAñoIngrPacienteC = new JLabel("Año:");
+
+        agregarAlPanel(txtAñoIngrPacienteC, panelConsultasPa, 190, 370, 30, 20);
+
+        comboAñoIngrPacienteC = new JComboBox<>();
+
+        for(int i = 2025; i >= 2010; i--){
+
+            comboAñoIngrPacienteC.addItem((short)i);
+
+        }
+
+        agregarAlPanel(comboAñoIngrPacienteC, panelConsultasPa, 220, 370, 70, 20);
+
+        btnBuscarC = new JButton("Buscar");
+
+        agregarAlPanel(btnBuscarC, panelConsultasPa, 200, 450, 100, 30);
+
+        btnRestaurarC = new JButton("Restaurar");
+
+        agregarAlPanel(btnRestaurarC, panelConsultasPa, 400, 450, 100, 30);
+
+        btnCancelarC = new JButton("Cancelar");
+
+        agregarAlPanel(btnCancelarC, panelConsultasPa, 600, 450, 100, 30);
+
+        tabla = new JTable();
+
+        JScrollPane scrollPaneC = new JScrollPane(tabla);
+
+        scrollPaneC.setBackground(Color.decode("#d2e2f1"));
+
+        agregarAlPanel(scrollPaneC, panelConsultasPa, 10, 500, 850, 200);
+
+        internalConsultasPa = new JInternalFrame();
+
+        internalConsultasPa.setSize(900, 800);
+
+        internalConsultasPa.add(panelConsultasPa);
+
+        internalConsultasPa.setTitle("Consultas");
+
+        caracteristicasInternal(internalConsultasPa);
+
+
+
         //==============================================================================================
 
 
+        desktopPaneInternals.add(internalConsultasPa);
 
         desktopPaneInternals.add(internalCambiosPa);
 
@@ -1143,6 +1451,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
             internalBajasPa.setVisible(false);
 
+            internalConsultasPa.setVisible(false);
+
             internalAltasPa.setVisible(true);
 
         }
@@ -1152,6 +1462,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
             internalAltasPa.setVisible(false);
 
             internalBajasPa.setVisible(false);
+
+            internalConsultasPa.setVisible(false);
 
             internalBajasPa.setVisible(true);
 
@@ -1164,7 +1476,22 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
             internalBajasPa.setVisible(false);
 
+            internalConsultasPa.setVisible(false);
+
             internalCambiosPa.setVisible(true);
+
+        }
+
+        if(componente == consultasPacientes){
+
+            internalAltasPa.setVisible(false);
+
+            internalBajasPa.setVisible(false);
+
+            internalCambiosPa.setVisible(false);
+
+            internalConsultasPa.setVisible(true);
+
 
         }
 
