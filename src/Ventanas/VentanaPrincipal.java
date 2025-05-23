@@ -31,7 +31,7 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
     //================================ ALTAS =====================================================
 
-    JButton btnAjustes, btnSesion, btnRecargar, btnEnviar, btnRestaurar;
+    JButton btnAjustes, btnSesion, btnRecargar, btnEnviar, btnRestaurar, btnCancelar;
 
     JTextField cajaNumPaciente, cajaNombrePaciente, cajaApePatPaciente, cajaApeMatPAciente, cajaCalleNumeroPaciente, cajaColoniaPaciente, cajaCPPaciente, cajaEstadoPaciente, cajaTelefonoPaciente;
 
@@ -43,7 +43,7 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
     //======================================= BAJAS ==================================================
 
-    JButton btnEnviarB, btnRestaurarB;
+    JButton btnBorrarB, btnRestaurarB, btnCancelarB, btnBuscarB;
 
     JTextField cajaNumPacienteB, cajaNombrePacienteB, cajaApePatPacienteB, cajaApeMatPAcienteB, cajaCalleNumeroPacienteB, cajaColoniaPacienteB, cajaCPPacienteB, cajaEstadoPacienteB, cajaTelefonoPacienteB;
 
@@ -55,7 +55,7 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
     //================================ MODIFICACIONES =============================================
 
-    JButton btnAjustesM, btnSesionM, btnRecargarM, btnEnviarM, btnRestaurarM;
+    JButton btnGuardarM, btnRestaurarM, btnCancelarM, btnBuscarM;
 
     JTextField cajaNumPacienteM, cajaNombrePacienteM, cajaApePatPacienteM, cajaApeMatPAcienteM, cajaCalleNumeroPacienteM, cajaColoniaPacienteM, cajaCPPacienteM, cajaEstadoPacienteM, cajaTelefonoPacienteM;
 
@@ -64,6 +64,9 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
     JComboBox<String> comboEstadoCivilPacienteM;
 
     JRadioButton radioHombreM, radioMujerM, radioNoBinarioM;
+
+
+    //========================================= Cambios ==========================================
 
 
     //=============================================================================================
@@ -525,6 +528,10 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         agregarAlPanel(btnRestaurar, panelAltasPa, 400, 450, 100, 30);
 
+        btnCancelar = new JButton("Cancelar");
+
+        agregarAlPanel(btnCancelar, panelAltasPa, 600, 450, 100, 30);
+
         tabla = new JTable();
 
         JScrollPane scrollPane = new JScrollPane(tabla);
@@ -578,6 +585,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         cajaNombrePacienteB = new JTextField();
 
+        cajaNombrePacienteB.setEditable(false);
+
         agregarAlPanel(cajaNombrePacienteB, panelBajasPa, 70, 150, 150, 20);
 
         JLabel txtApePatPacienteB = new JLabel("Apellido Paterno:");
@@ -585,6 +594,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
         agregarAlPanel(txtApePatPacienteB, panelBajasPa, 220, 150, 100, 20);
 
         cajaApePatPacienteB = new JTextField();
+
+        cajaApePatPacienteB.setEditable(false);
 
         agregarAlPanel(cajaApePatPacienteB, panelBajasPa, 320, 150, 150, 20);
 
@@ -594,6 +605,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         cajaApeMatPAcienteB = new JTextField();
 
+        cajaApeMatPAcienteB.setEditable(false);
+
         agregarAlPanel(cajaApeMatPAcienteB, panelBajasPa, 580, 150, 150, 20);
 
         JLabel txtCallePacienteB = new JLabel("Calle y Número del Paciente:");
@@ -601,6 +614,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
         agregarAlPanel(txtCallePacienteB, panelBajasPa, 10, 180, 170, 20);
 
         cajaCalleNumeroPacienteB = new JTextField();
+
+        cajaCalleNumeroPacienteB.setEditable(false);
 
         agregarAlPanel(cajaCalleNumeroPacienteB, panelBajasPa, 180, 180, 150, 20);
 
@@ -610,6 +625,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         cajaColoniaPacienteB = new JTextField();
 
+        cajaColoniaPacienteB.setEditable(false);
+
         agregarAlPanel(cajaColoniaPacienteB, panelBajasPa, 400, 180, 100, 20);
 
         JLabel txtxCPPacienteB = new JLabel("Código Postal:");
@@ -617,6 +634,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
         agregarAlPanel(txtxCPPacienteB, panelBajasPa, 510, 180, 100, 20);
 
         cajaCPPacienteB = new JTextField();
+
+        cajaCPPacienteB.setEditable(false);
 
         agregarAlPanel(cajaCPPacienteB, panelBajasPa, 610, 180, 50, 20);
 
@@ -626,6 +645,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         cajaEstadoPacienteB = new JTextField();
 
+        cajaEstadoPacienteB.setEditable(false);
+
         agregarAlPanel(cajaEstadoPacienteB, panelBajasPa, 730, 180, 100, 20);
 
         JLabel txtTelefonoPacientesB = new JLabel("Telefono:");
@@ -633,6 +654,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
         agregarAlPanel(txtTelefonoPacientesB, panelBajasPa, 10, 210, 60, 20);
 
         cajaTelefonoPacienteB = new JTextField();
+
+        cajaTelefonoPacienteB.setEditable(false);
 
         agregarAlPanel(cajaTelefonoPacienteB, panelBajasPa, 70, 210, 100, 20);
 
@@ -645,6 +668,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
         agregarAlPanel(txtDiaNacPacienteB, panelBajasPa, 10, 260, 30, 20);
 
         comboDiaNacPacienteB = new JComboBox<>();
+
+        comboDiaNacPacienteB.setEnabled(false);
 
         for(int i = 1; i <= 30; i++){
 
@@ -660,7 +685,7 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         comboMesNacPacienteB = new JComboBox<>();
 
-
+        comboMesNacPacienteB.setEnabled(false);
 
         for(int i = 1; i <= 12; i++){
 
@@ -676,6 +701,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         comboAñoNacPacienteB = new JComboBox<>();
 
+        comboAñoNacPacienteB.setEnabled(false);
+
         for(int i = 2025; i >= 1900; i--){
 
             comboAñoNacPacienteB.addItem((short)i);
@@ -690,17 +717,23 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         radioHombreB = new JRadioButton("Hombre");
 
+        radioHombreB.setEnabled(false);
+
         bgSexoB.add(radioHombreB);
 
         agregarAlPanel(radioHombreB, panelBajasPa, 50, 290, 80, 20);
 
         radioMujerB = new JRadioButton("Mujer");
 
+        radioMujerB.setEnabled(false);
+
         bgSexoB.add(radioMujerB);
 
         agregarAlPanel(radioMujerB, panelBajasPa, 130, 290, 80, 20);
 
         radioNoBinarioB = new JRadioButton("No Binario");
+
+        radioNoBinarioB.setEnabled(false);
 
         bgSexoB.add(radioNoBinarioB);
 
@@ -711,6 +744,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
         agregarAlPanel(txtEstadoCivilB, panelBajasPa, 10, 320, 100, 20);
 
         comboEstadoCivilPacienteB = new JComboBox<>();
+
+        comboEstadoCivilPacienteB.setEnabled(false);
 
         comboEstadoCivilPacienteB.addItem("Soltero");
 
@@ -736,6 +771,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         comboDiaIngrPacienteB = new JComboBox<>();
 
+        comboDiaIngrPacienteB.setEnabled(false);
+
         for(int i = 1; i <= 30; i++){
 
             comboDiaIngrPacienteB.addItem((short)i);
@@ -749,6 +786,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
         agregarAlPanel(txtMesIngrPacienteB, panelBajasPa, 100, 370, 30, 20);
 
         comboMesIngrPacienteB = new JComboBox<>();
+
+        comboMesIngrPacienteB.setEnabled(false);
 
         for(int i = 1; i <= 12; i++){
 
@@ -764,6 +803,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         comboAñoIngrPacienteB = new JComboBox<>();
 
+        comboAñoIngrPacienteB.setEnabled(false);
+
         for(int i = 2025; i >= 2010; i--){
 
             comboAñoIngrPacienteB.addItem((short)i);
@@ -772,13 +813,21 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         agregarAlPanel(comboAñoIngrPacienteB, panelBajasPa, 220, 370, 70, 20);
 
-        btnEnviarB = new JButton("Enviar");
+        btnBuscarB = new JButton("Buscar");
 
-        agregarAlPanel(btnEnviarB, panelBajasPa, 200, 450, 100, 30);
+        agregarAlPanel(btnBuscarB, panelBajasPa, 100, 450, 100, 30);
+
+        btnBorrarB = new JButton("Borrar");
+
+        agregarAlPanel(btnBorrarB, panelBajasPa, 250, 450, 100, 30);
 
         btnRestaurarB = new JButton("Restaurar");
 
         agregarAlPanel(btnRestaurarB, panelBajasPa, 400, 450, 100, 30);
+
+        btnCancelarB = new JButton("Cancelar");
+
+        agregarAlPanel(btnCancelarB, panelBajasPa, 550, 450, 100, 30);
 
         tablaB = new JTable();
 
@@ -819,7 +868,7 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         txtTituloM.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 20));
 
-        agregarAlPanel(txtTituloM, panelModificacionesDiseño, 50, 40, 200, 40);
+        agregarAlPanel(txtTituloM, panelModificacionesDiseño, 50, 40, 300, 40);
 
         agregarAlPanel(panelModificacionesDiseño, panelModificacionesPa, 0,0,900,100);
 
@@ -1031,13 +1080,21 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         agregarAlPanel(comboAñoIngrPacienteM, panelModificacionesPa, 220, 370, 70, 20);
 
-        btnEnviarM = new JButton("Enviar");
+        btnBuscarM = new JButton("Buscar");
 
-        agregarAlPanel(btnEnviarM, panelModificacionesPa, 200, 450, 100, 30);
+        agregarAlPanel(btnBuscarM, panelModificacionesPa, 100, 450, 100, 30);
+
+        btnGuardarM = new JButton("Guardar");
+
+        agregarAlPanel(btnGuardarM, panelModificacionesPa, 250, 450, 100, 30);
 
         btnRestaurarM = new JButton("Restaurar");
 
         agregarAlPanel(btnRestaurarM, panelModificacionesPa, 400, 450, 100, 30);
+
+        btnCancelarM = new JButton("Cancelar");
+
+        agregarAlPanel(btnCancelarM, panelModificacionesPa, 550, 450, 100, 30);
 
         tablaM = new JTable();
 
@@ -1082,17 +1139,30 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         if(componente == altasPacientes){
 
+            internalCambiosPa.setVisible(false);
+
+            internalBajasPa.setVisible(false);
+
             internalAltasPa.setVisible(true);
 
         }
 
         if(componente == bajasPacientes){
 
+            internalAltasPa.setVisible(false);
+
+            internalBajasPa.setVisible(false);
+
             internalBajasPa.setVisible(true);
+
 
         }
 
         if(componente == cambiosPacientes){
+
+            internalAltasPa.setVisible(false);
+
+            internalBajasPa.setVisible(false);
 
             internalCambiosPa.setVisible(true);
 
