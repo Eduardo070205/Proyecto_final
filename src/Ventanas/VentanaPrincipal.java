@@ -6,10 +6,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
 
 public class VentanaPrincipal extends Elementos implements ActionListener {
 
     JTable tabla, tablaB, tablaM;
+
+    byte numDias = 1;
+
+    LocalDateTime fechaHoy = LocalDateTime.now();
 
     JMenu menuPacientes, menuDoctores, menuTrabajadores;
 
@@ -429,39 +434,9 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         agregarAlPanel(txtxFechaNacPaciente, panelAltasPa, 10, 240, 120, 20);
 
-        JLabel txtDiaNacPaciente = new JLabel("Dia:");
-
-        agregarAlPanel(txtDiaNacPaciente, panelAltasPa, 10, 260, 30, 20);
-
-        comboDiaNacPaciente = new JComboBox<>();
-
-        for(int i = 1; i <= 30; i++){
-
-            comboDiaNacPaciente.addItem((short)i);
-
-        }
-
-        agregarAlPanel(comboDiaNacPaciente, panelAltasPa, 40, 260, 50, 20);
-
-        JLabel txtMesNacPaciente = new JLabel("Mes:");
-
-        agregarAlPanel(txtMesNacPaciente, panelAltasPa, 100, 260, 30, 20);
-
-        comboMesNacPaciente = new JComboBox<>();
-
-
-
-        for(int i = 1; i <= 12; i++){
-
-            comboMesNacPaciente.addItem((short)i);
-
-        }
-
-        agregarAlPanel(comboMesNacPaciente, panelAltasPa, 130, 260, 50, 20);
-
         JLabel txtAñoNacPaciente = new JLabel("Año:");
 
-        agregarAlPanel(txtAñoNacPaciente, panelAltasPa, 190, 260, 30, 20);
+        agregarAlPanel(txtAñoNacPaciente, panelAltasPa, 10, 260, 30, 20);
 
         comboAñoNacPaciente = new JComboBox<>();
 
@@ -471,7 +446,77 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         }
 
-        agregarAlPanel(comboAñoNacPaciente, panelAltasPa, 220, 260, 70, 20);
+        agregarAlPanel(comboAñoNacPaciente, panelAltasPa, 40, 260, 70, 20);
+
+        comboAñoNacPaciente.setSelectedItem((short)fechaHoy.getYear());
+
+        JLabel txtMesNacPaciente = new JLabel("Mes:");
+
+        agregarAlPanel(txtMesNacPaciente, panelAltasPa, 120, 260, 30, 20);
+
+        comboMesNacPaciente = new JComboBox<>();
+
+
+        for(int i = 1; i <= 12; i++){
+
+            comboMesNacPaciente.addItem((short)i);
+
+        }
+
+        agregarAlPanel(comboMesNacPaciente, panelAltasPa, 150, 260, 50, 20);
+
+        comboMesNacPaciente.setSelectedItem((short)fechaHoy.getMonthValue());
+
+        comboMesNacPaciente.addActionListener(this);
+
+        short mesSeleccionado = Short.parseShort(comboMesNacPaciente.getSelectedItem().toString());
+
+        if(mesSeleccionado == 1 || mesSeleccionado == 3 || mesSeleccionado == 5 || mesSeleccionado == 7 || mesSeleccionado == 8 || mesSeleccionado == 10 || mesSeleccionado == 12){
+
+            numDias = 31;
+
+        } else if (mesSeleccionado == 2) {
+
+            short año = Short.parseShort(comboAñoNacPaciente.getSelectedItem().toString());
+
+            if ((año % 4 == 0 && año % 100 != 0) || (año % 100 == 0 && año % 400 == 0)){
+
+                numDias = 29;
+
+            }else{
+
+                numDias = 28;
+
+            }
+
+        }else {
+
+            numDias = 30;
+
+        }
+
+        JLabel txtDiaNacPaciente = new JLabel("Dia:");
+
+        agregarAlPanel(txtDiaNacPaciente, panelAltasPa, 210, 260, 30, 20);
+
+
+        comboDiaNacPaciente = new JComboBox<>();
+
+        //comboDiaNacPaciente.setEnabled(false);
+
+
+        for(int i = 1; i <= numDias; i++){
+
+            comboDiaNacPaciente.addItem((short)i);
+
+        }
+
+        agregarAlPanel(comboDiaNacPaciente, panelAltasPa, 240, 260, 50, 20);
+
+        comboDiaNacPaciente.setSelectedItem((short)fechaHoy.getDayOfMonth());
+
+
+
 
         JLabel txtSexoPaciente = new JLabel("Sexo:");
 
@@ -519,25 +564,28 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         agregarAlPanel(txtxFechaIngrPaciente, panelAltasPa, 10, 350, 120, 20);
 
-        JLabel txtDiaIngrPaciente = new JLabel("Dia:");
+        JLabel txtAñoIngrPaciente = new JLabel("Año:");
 
-        agregarAlPanel(txtDiaIngrPaciente, panelAltasPa, 10, 370, 30, 20);
+        agregarAlPanel(txtAñoIngrPaciente, panelAltasPa, 10, 370, 30, 20);
 
-        comboDiaIngrPaciente = new JComboBox<>();
+        comboAñoIngrPaciente = new JComboBox<>();
 
-        for(int i = 1; i <= 30; i++){
+        for(int i = 2025; i >= 1900; i--){
 
-            comboDiaIngrPaciente.addItem((short)i);
+            comboAñoIngrPaciente.addItem((short)i);
 
         }
 
-        agregarAlPanel(comboDiaIngrPaciente, panelAltasPa, 40, 370, 50, 20);
+        agregarAlPanel(comboAñoIngrPaciente, panelAltasPa, 40, 370, 70, 20);
+
+        comboAñoIngrPaciente.setSelectedItem((short)fechaHoy.getYear());
 
         JLabel txtMesIngrPaciente = new JLabel("Mes:");
 
-        agregarAlPanel(txtMesIngrPaciente, panelAltasPa, 100, 370, 30, 20);
+        agregarAlPanel(txtMesIngrPaciente, panelAltasPa, 120, 370, 30, 20);
 
         comboMesIngrPaciente = new JComboBox<>();
+
 
         for(int i = 1; i <= 12; i++){
 
@@ -545,21 +593,57 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         }
 
-        agregarAlPanel(comboMesIngrPaciente, panelAltasPa, 130, 370, 50, 20);
+        agregarAlPanel(comboMesIngrPaciente, panelAltasPa, 150, 370, 50, 20);
 
-        JLabel txtAñoIngrPaciente = new JLabel("Año:");
+        comboMesIngrPaciente.setSelectedItem((short)fechaHoy.getMonthValue());
 
-        agregarAlPanel(txtAñoIngrPaciente, panelAltasPa, 190, 370, 30, 20);
+        comboMesIngrPaciente.addActionListener(this);
 
-        comboAñoIngrPaciente = new JComboBox<>();
+        mesSeleccionado = Short.parseShort(comboMesIngrPaciente.getSelectedItem().toString());
 
-        for(int i = 2025; i >= 2010; i--){
+        if(mesSeleccionado == 1 || mesSeleccionado == 3 || mesSeleccionado == 5 || mesSeleccionado == 7 || mesSeleccionado == 8 || mesSeleccionado == 10 || mesSeleccionado == 12){
 
-            comboAñoIngrPaciente.addItem((short)i);
+            numDias = 31;
+
+        } else if (mesSeleccionado == 2) {
+
+            short año = Short.parseShort(comboAñoIngrPaciente.getSelectedItem().toString());
+
+            if ((año % 4 == 0 && año % 100 != 0) || (año % 100 == 0 && año % 400 == 0)){
+
+                numDias = 29;
+
+            }else{
+
+                numDias = 28;
+
+            }
+
+        }else {
+
+            numDias = 30;
 
         }
 
-        agregarAlPanel(comboAñoIngrPaciente, panelAltasPa, 220, 370, 70, 20);
+        JLabel txtDiaIngrPaciente = new JLabel("Dia:");
+
+        agregarAlPanel(txtDiaIngrPaciente, panelAltasPa, 210, 370, 30, 20);
+
+
+        comboDiaIngrPaciente = new JComboBox<>();
+
+        //comboDiaNacPaciente.setEnabled(false);
+
+
+        for(int i = 1; i <= numDias; i++){
+
+            comboDiaIngrPaciente.addItem((short)i);
+
+        }
+
+        agregarAlPanel(comboDiaIngrPaciente, panelAltasPa, 240, 370, 50, 20);
+
+        comboDiaIngrPaciente.setSelectedItem((short)fechaHoy.getDayOfMonth());
 
         btnEnviar = new JButton("Enviar");
 
@@ -1479,6 +1563,82 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
             internalConsultasPa.setVisible(false);
 
             internalCambiosPa.setVisible(true);
+
+        }
+
+        if(componente == comboMesNacPaciente){
+
+            short mesSeleccionado = Short.parseShort(comboMesNacPaciente.getSelectedItem().toString());
+
+            if(mesSeleccionado == 1 || mesSeleccionado == 3 || mesSeleccionado == 5 || mesSeleccionado == 7 || mesSeleccionado == 8 || mesSeleccionado == 10 || mesSeleccionado == 12){
+
+                numDias = 31;
+
+            } else if (mesSeleccionado == 2) {
+
+                short año = Short.parseShort(comboAñoNacPaciente.getSelectedItem().toString());
+
+                if ((año % 4 == 0 && año % 100 != 0) || (año % 100 == 0 && año % 400 == 0)){
+
+                    numDias = 29;
+
+                }else{
+
+                    numDias = 28;
+
+                }
+
+            }else {
+
+                numDias = 30;
+
+            }
+
+            comboDiaNacPaciente.removeAllItems();
+
+            for(int i = 1; i <= numDias; i++){
+
+                comboDiaNacPaciente.addItem((short)i);
+
+            }
+
+        }
+
+        if(componente == comboMesIngrPaciente){
+
+            short mesSeleccionado = Short.parseShort(comboMesIngrPaciente.getSelectedItem().toString());
+
+            if(mesSeleccionado == 1 || mesSeleccionado == 3 || mesSeleccionado == 5 || mesSeleccionado == 7 || mesSeleccionado == 8 || mesSeleccionado == 10 || mesSeleccionado == 12){
+
+                numDias = 31;
+
+            } else if (mesSeleccionado == 2) {
+
+                short año = Short.parseShort(comboAñoIngrPaciente.getSelectedItem().toString());
+
+                if ((año % 4 == 0 && año % 100 != 0) || (año % 100 == 0 && año % 400 == 0)){
+
+                    numDias = 29;
+
+                }else{
+
+                    numDias = 28;
+
+                }
+
+            }else {
+
+                numDias = 30;
+
+            }
+
+            comboDiaIngrPaciente.removeAllItems();
+
+            for(int i = 1; i <= numDias; i++){
+
+                comboDiaIngrPaciente.addItem((short)i);
+
+            }
 
         }
 
