@@ -7,12 +7,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class VentanaPrincipal extends Elementos implements ActionListener {
 
     JTable tabla, tablaB, tablaM;
 
     byte numDias = 1;
+
+
 
     LocalDateTime fechaHoy = LocalDateTime.now();
 
@@ -84,6 +87,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
     JRadioButton radioHombreC, radioMujerC, radioNoBinarioC;
 
     JRadioButton radionombre, radioApePat, radioApeMat, radioColonia, radioCP, radioEstado, radiodiaNac, radioMesNac, radioAñoNac, radioDiaIng, radioMesIng, radioAñoIng, radioEstadoCivil, radioSexo, radioTodos;
+
+    ArrayList<JRadioButton> radiosConsultas = new ArrayList<>();
 
     //=============================================================================================
 
@@ -1274,11 +1279,15 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         bgConsultas.add(radioTodos);
 
+        radiosConsultas.add((radioTodos));
+
         agregarAlPanel(radioTodos, panelConsultasPa,10, 120, 100, 20);
 
         radionombre = new JRadioButton("Nombre");
 
         bgConsultas.add(radionombre);
+
+        radiosConsultas.add((radionombre));
 
         agregarAlPanel(radionombre, panelConsultasPa, 10, 150, 100, 20);
 
@@ -1290,6 +1299,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         bgConsultas.add(radioApePat);
 
+        radiosConsultas.add((radioApePat));
+
         agregarAlPanel(radioApePat, panelConsultasPa, 270, 150, 120, 20);
 
         cajaApePatPacienteC = new JTextField();
@@ -1299,6 +1310,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
         radioApeMat = new JRadioButton("Apellido materno");
 
         bgConsultas.add(radioApeMat);
+
+        radiosConsultas.add((radioApeMat));
 
         agregarAlPanel(radioApeMat, panelConsultasPa, 560, 150, 120, 20);
 
@@ -1310,6 +1323,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         bgConsultas.add(radioColonia);
 
+        radiosConsultas.add((radioColonia));
+
         agregarAlPanel(radioColonia, panelConsultasPa, 10, 180, 100, 20);
 
         cajaColoniaPacienteC = new JTextField();
@@ -1320,6 +1335,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         bgConsultas.add(radioCP);
 
+        radiosConsultas.add((radioCP));
+
         agregarAlPanel(radioCP, panelConsultasPa, 230, 180, 120, 20);
 
         cajaCPPacienteC = new JTextField();
@@ -1329,6 +1346,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
         radioEstado = new JRadioButton("Estado");
 
         bgConsultas.add(radioEstado);
+
+        radiosConsultas.add((radioEstado));
 
         agregarAlPanel(radioEstado, panelConsultasPa, 420, 180, 80, 20);
 
@@ -1347,6 +1366,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         bgConsultas.add(radiodiaNac);
 
+        radiosConsultas.add((radiodiaNac));
+
         comboDiaNacPacienteC = new JComboBox<>();
 
         for(int i = 1; i <= 30; i++){
@@ -1360,6 +1381,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
         radioMesNac = new JRadioButton("Mes");
 
         bgConsultas.add(radioMesNac);
+
+        radiosConsultas.add((radioMesNac));
 
         agregarAlPanel(radioMesNac, panelConsultasPa, 130, 260, 50, 20);
 
@@ -1378,6 +1401,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         bgConsultas.add(radioAñoNac);
 
+        radiosConsultas.add((radioAñoNac));
+
         agregarAlPanel(radioAñoNac, panelConsultasPa, 250, 260, 50, 20);
 
         comboAñoNacPacienteC = new JComboBox<>();
@@ -1394,11 +1419,15 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         bgConsultas.add(radioSexo);
 
+        radiosConsultas.add((radioSexo));
+
         agregarAlPanel(radioSexo, panelConsultasPa, 10, 290, 60, 20);
 
         radioHombreC = new JRadioButton("Hombre");
 
         bgSexoC.add(radioHombreC);
+
+
 
         agregarAlPanel(radioHombreC, panelConsultasPa, 80, 290, 80, 20);
 
@@ -1417,6 +1446,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
         radioEstadoCivil = new JRadioButton("Estado civil");
 
         bgConsultas.add(radioEstadoCivil);
+
+        radiosConsultas.add((radioEstadoCivil));
 
         agregarAlPanel(radioEstadoCivil, panelConsultasPa, 10, 320, 100, 20);
 
@@ -1444,6 +1475,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         bgConsultas.add(radioDiaIng);
 
+        radiosConsultas.add((radioDiaIng));
+
         agregarAlPanel(radioDiaIng, panelConsultasPa, 10, 370, 50, 20);
 
         comboDiaIngrPacienteC = new JComboBox<>();
@@ -1460,6 +1493,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         bgConsultas.add(radioMesIng);
 
+        radiosConsultas.add((radioMesIng));
+
         agregarAlPanel(radioMesIng, panelConsultasPa, 140, 370, 50, 20);
 
         comboMesIngrPacienteC = new JComboBox<>();
@@ -1473,6 +1508,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
         agregarAlPanel(comboMesIngrPacienteC, panelConsultasPa, 200, 370, 50, 20);
 
         radioAñoIng = new JRadioButton();
+
+        radiosConsultas.add((radioAñoIng));
 
         bgConsultas.add(radioAñoIng);
 
@@ -1518,6 +1555,36 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         caracteristicasInternal(internalConsultasPa);
 
+        radioTodos.addActionListener(this);
+
+        radionombre.addActionListener(this);
+
+        radioApePat.addActionListener(this);
+
+        radioApeMat.addActionListener(this);
+
+        radioColonia.addActionListener(this);
+
+        radioCP.addActionListener(this);
+
+        radioEstado.addActionListener(this);
+
+        radiodiaNac.addActionListener(this);
+
+        radioMesNac.addActionListener(this);
+
+        radioAñoNac.addActionListener(this);
+
+        radioSexo.addActionListener(this);
+
+        radioEstadoCivil.addActionListener(this);
+
+        radioDiaIng.addActionListener(this);
+
+        radioMesIng.addActionListener(this);
+
+        radioAñoIng.addActionListener(this);
+
 
 
         //==============================================================================================
@@ -1543,6 +1610,101 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         Object componente = e.getSource();
+
+        Component[] componentes = panelConsultasPa.getComponents();
+
+        int j = 0;
+
+        for (Component comp : componentes) {
+
+
+            if(comp instanceof JRadioButton){
+
+                if(comp == radiosConsultas.get(j)){
+
+                    comp.setEnabled(true);
+
+                    j++;
+
+                }else{
+
+                    comp.setEnabled(false);
+
+                }
+
+            }else if(comp instanceof JButton){
+
+                comp.setEnabled(true);
+
+            }else{
+
+                comp.setEnabled(false);
+
+            }
+
+        }
+
+        if (componente == radionombre) {
+
+            cajaNombrePacienteC.setEnabled(true);
+
+        } else if (componente == radioApePat) {
+
+            cajaApePatPacienteC.setEnabled(true);
+
+        } else if (componente == radioApeMat) {
+
+            cajaApeMatPAcienteC.setEnabled(true);
+
+        } else if (componente == radioColonia) {
+
+            cajaColoniaPacienteC.setEnabled(true);
+
+        } else if (componente == radioCP) {
+
+            cajaCPPacienteC.setEnabled(true);
+
+        } else if (componente == radioEstado) {
+
+            cajaEstadoPacienteC.setEnabled(true);
+
+        } else if (componente == radiodiaNac) {
+
+            comboDiaNacPacienteC.setEnabled(true);
+
+        } else if (componente == radioMesNac) {
+
+            comboMesNacPacienteC.setEnabled(true);
+
+        } else if (componente == radioAñoNac) {
+
+            comboAñoNacPacienteC.setEnabled(true);
+
+        } else if (componente == radioEstadoCivil) {
+
+            comboEstadoCivilPacienteC.setEnabled(true);
+
+        } else if (componente == radioDiaIng) {
+
+            comboDiaIngrPacienteC.setEnabled(true);
+
+        } else if (componente == radioMesIng) {
+
+            comboMesIngrPacienteC.setEnabled(true);
+
+        } else if (componente == radioAñoIng) {
+
+            comboAñoIngrPacienteC.setEnabled(true);
+
+        } else if(componente == radioSexo){
+
+            radioHombreC.setEnabled(true);
+
+            radioMujerC.setEnabled(true);
+
+            radioNoBinarioC.setEnabled(true);
+
+        }
 
         if(componente == altasPacientes){
 
