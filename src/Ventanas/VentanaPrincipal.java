@@ -83,6 +83,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
     JRadioButton radioHombreC, radioMujerC, radioNoBinarioC;
 
+    JRadioButton radionombre, radioApePat, radioApeMat, radioColonia, radioCP, radioEstado, radiodiaNac, radioMesNac, radioAñoNac, radioDiaIng, radioMesIng, radioAñoIng, radioEstadoCivil, radioSexo, radioTodos;
+
     //=============================================================================================
 
     JPanel panelAltasPa, panelBajasPa, panelModificacionesPa, panelConsultasPa;
@@ -94,6 +96,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
     ButtonGroup bgSexoM = new ButtonGroup();
 
     ButtonGroup bgSexoC = new ButtonGroup();
+
+    ButtonGroup bgConsultas = new ButtonGroup();
 
     JPanel panelAltasDiseño = new JPanel();
 
@@ -1265,85 +1269,83 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         agregarAlPanel(panelConsultasDiseño, panelConsultasPa, 0,0,900,100);
 
-        JLabel txtNumPacienteC = new JLabel("Numero de Paciente:");
 
-        agregarAlPanel(txtNumPacienteC, panelConsultasPa, 10, 120, 150, 20);
+        radioTodos = new JRadioButton("Todos");
 
-        cajaNumPacienteC = new JTextField();
+        bgConsultas.add(radioTodos);
 
-        agregarAlPanel(cajaNumPacienteC, panelConsultasPa,160, 120, 100, 20);
+        agregarAlPanel(radioTodos, panelConsultasPa,10, 120, 100, 20);
 
-        JLabel txtNombrePacienteC = new JLabel("Nombre:");
+        radionombre = new JRadioButton("Nombre");
 
-        agregarAlPanel(txtNombrePacienteC, panelConsultasPa, 10, 150, 60, 20);
+        bgConsultas.add(radionombre);
+
+        agregarAlPanel(radionombre, panelConsultasPa, 10, 150, 100, 20);
 
         cajaNombrePacienteC = new JTextField();
 
-        agregarAlPanel(cajaNombrePacienteC, panelConsultasPa, 70, 150, 150, 20);
+        agregarAlPanel(cajaNombrePacienteC, panelConsultasPa, 110, 150, 150, 20);
 
-        JLabel txtApePatPacienteC = new JLabel("Apellido Paterno:");
+        radioApePat = new JRadioButton("Apellido parteno");
 
-        agregarAlPanel(txtApePatPacienteC, panelConsultasPa, 220, 150, 100, 20);
+        bgConsultas.add(radioApePat);
+
+        agregarAlPanel(radioApePat, panelConsultasPa, 270, 150, 120, 20);
 
         cajaApePatPacienteC = new JTextField();
 
-        agregarAlPanel(cajaApePatPacienteC, panelConsultasPa, 320, 150, 150, 20);
+        agregarAlPanel(cajaApePatPacienteC, panelConsultasPa, 400, 150, 150, 20);
 
-        JLabel txtApeMatPacienteC = new JLabel("Apellido Materno:");
+        radioApeMat = new JRadioButton("Apellido materno");
 
-        agregarAlPanel(txtApeMatPacienteC, panelConsultasPa, 480, 150, 100, 20);
+        bgConsultas.add(radioApeMat);
+
+        agregarAlPanel(radioApeMat, panelConsultasPa, 560, 150, 120, 20);
 
         cajaApeMatPAcienteC = new JTextField();
 
-        agregarAlPanel(cajaApeMatPAcienteC, panelConsultasPa, 580, 150, 150, 20);
+        agregarAlPanel(cajaApeMatPAcienteC, panelConsultasPa, 690, 150, 150, 20);
 
-        JLabel txtCallePacienteC = new JLabel("Calle y Número del Paciente:");
+        radioColonia = new JRadioButton("Colonia");
 
-        agregarAlPanel(txtCallePacienteC, panelConsultasPa, 10, 180, 170, 20);
+        bgConsultas.add(radioColonia);
 
-        cajaCalleNumeroPacienteC = new JTextField();
-
-        agregarAlPanel(cajaCalleNumeroPacienteC, panelConsultasPa, 180, 180, 150, 20);
-
-        JLabel txtColoniaPacienteC = new JLabel("Colonia:");
-
-        agregarAlPanel(txtColoniaPacienteC, panelConsultasPa, 340, 180, 60, 20);
+        agregarAlPanel(radioColonia, panelConsultasPa, 10, 180, 100, 20);
 
         cajaColoniaPacienteC = new JTextField();
 
-        agregarAlPanel(cajaColoniaPacienteC, panelConsultasPa, 400, 180, 100, 20);
+        agregarAlPanel(cajaColoniaPacienteC, panelConsultasPa, 120, 180, 100, 20);
 
-        JLabel txtxCPPacienteC = new JLabel("Código Postal:");
+        radioCP = new JRadioButton("Código postal");
 
-        agregarAlPanel(txtxCPPacienteC, panelConsultasPa, 510, 180, 100, 20);
+        bgConsultas.add(radioCP);
+
+        agregarAlPanel(radioCP, panelConsultasPa, 230, 180, 120, 20);
 
         cajaCPPacienteC = new JTextField();
 
-        agregarAlPanel(cajaCPPacienteC, panelConsultasPa, 610, 180, 50, 20);
+        agregarAlPanel(cajaCPPacienteC, panelConsultasPa, 360, 180, 50, 20);
 
-        JLabel txtEstadoPacienteC = new JLabel("Estado:");
+        radioEstado = new JRadioButton("Estado");
 
-        agregarAlPanel(txtEstadoPacienteC, panelConsultasPa, 670, 180, 60, 20);
+        bgConsultas.add(radioEstado);
+
+        agregarAlPanel(radioEstado, panelConsultasPa, 420, 180, 80, 20);
 
         cajaEstadoPacienteC = new JTextField();
 
-        agregarAlPanel(cajaEstadoPacienteC, panelConsultasPa, 730, 180, 100, 20);
+        agregarAlPanel(cajaEstadoPacienteC, panelConsultasPa, 510, 180, 100, 20);
 
-        JLabel txtTelefonoPacientesC = new JLabel("Telefono:");
-
-        agregarAlPanel(txtTelefonoPacientesC, panelConsultasPa, 10, 210, 60, 20);
-
-        cajaTelefonoPacienteC = new JTextField();
-
-        agregarAlPanel(cajaTelefonoPacienteC, panelConsultasPa, 70, 210, 100, 20);
 
         JLabel txtxFechaNacPacienteC = new JLabel("Fecha de nacimiento");
 
         agregarAlPanel(txtxFechaNacPacienteC, panelConsultasPa, 10, 240, 120, 20);
 
-        JLabel txtDiaNacPacienteC = new JLabel("Dia:");
+        radiodiaNac = new JRadioButton("Dia");
 
-        agregarAlPanel(txtDiaNacPacienteC, panelConsultasPa, 10, 260, 30, 20);
+        agregarAlPanel(radiodiaNac, panelConsultasPa, 10, 260, 50, 20);
+
+        bgConsultas.add(radiodiaNac);
 
         comboDiaNacPacienteC = new JComboBox<>();
 
@@ -1353,14 +1355,15 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         }
 
-        agregarAlPanel(comboDiaNacPacienteC, panelConsultasPa, 40, 260, 50, 20);
+        agregarAlPanel(comboDiaNacPacienteC, panelConsultasPa, 70, 260, 50, 20);
 
-        JLabel txtMesNacPacienteC = new JLabel("Mes:");
+        radioMesNac = new JRadioButton("Mes");
 
-        agregarAlPanel(txtMesNacPacienteC, panelConsultasPa, 100, 260, 30, 20);
+        bgConsultas.add(radioMesNac);
+
+        agregarAlPanel(radioMesNac, panelConsultasPa, 130, 260, 50, 20);
 
         comboMesNacPacienteC = new JComboBox<>();
-
 
 
         for(int i = 1; i <= 12; i++){
@@ -1369,11 +1372,13 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         }
 
-        agregarAlPanel(comboMesNacPacienteC, panelConsultasPa, 130, 260, 50, 20);
+        agregarAlPanel(comboMesNacPacienteC, panelConsultasPa, 190, 260, 50, 20);
 
-        JLabel txtAñoNacPacienteC = new JLabel("Año:");
+        radioAñoNac = new JRadioButton("Año");
 
-        agregarAlPanel(txtAñoNacPacienteC, panelConsultasPa, 190, 260, 30, 20);
+        bgConsultas.add(radioAñoNac);
+
+        agregarAlPanel(radioAñoNac, panelConsultasPa, 250, 260, 50, 20);
 
         comboAñoNacPacienteC = new JComboBox<>();
 
@@ -1383,33 +1388,37 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         }
 
-        agregarAlPanel(comboAñoNacPacienteC, panelConsultasPa, 220, 260, 70, 20);
+        agregarAlPanel(comboAñoNacPacienteC, panelConsultasPa, 310, 260, 70, 20);
 
-        JLabel txtSexoPacienteC = new JLabel("Sexo:");
+        radioSexo = new JRadioButton("Sexo");
 
-        agregarAlPanel(txtSexoPacienteC, panelConsultasPa, 10, 290, 40, 20);
+        bgConsultas.add(radioSexo);
+
+        agregarAlPanel(radioSexo, panelConsultasPa, 10, 290, 60, 20);
 
         radioHombreC = new JRadioButton("Hombre");
 
         bgSexoC.add(radioHombreC);
 
-        agregarAlPanel(radioHombreC, panelConsultasPa, 50, 290, 80, 20);
+        agregarAlPanel(radioHombreC, panelConsultasPa, 80, 290, 80, 20);
 
         radioMujerC = new JRadioButton("Mujer");
 
         bgSexoC.add(radioMujerC);
 
-        agregarAlPanel(radioMujerC, panelConsultasPa, 130, 290, 80, 20);
+        agregarAlPanel(radioMujerC, panelConsultasPa, 160, 290, 80, 20);
 
         radioNoBinarioC = new JRadioButton("No Binario");
 
         bgSexoC.add(radioNoBinarioC);
 
-        agregarAlPanel(radioNoBinarioC, panelConsultasPa, 210, 290, 100, 20);
+        agregarAlPanel(radioNoBinarioC, panelConsultasPa, 240, 290, 100, 20);
 
-        JLabel txtEstadoCivilC = new JLabel("Estado civil:");
+        radioEstadoCivil = new JRadioButton("Estado civil");
 
-        agregarAlPanel(txtEstadoCivilC, panelConsultasPa, 10, 320, 100, 20);
+        bgConsultas.add(radioEstadoCivil);
+
+        agregarAlPanel(radioEstadoCivil, panelConsultasPa, 10, 320, 100, 20);
 
         comboEstadoCivilPacienteC = new JComboBox<>();
 
@@ -1431,9 +1440,11 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         agregarAlPanel(txtxFechaIngrPacienteC, panelConsultasPa, 10, 350, 120, 20);
 
-        JLabel txtDiaIngrPacienteC = new JLabel("Dia:");
+        radioDiaIng = new JRadioButton("Dia");
 
-        agregarAlPanel(txtDiaIngrPacienteC, panelConsultasPa, 10, 370, 30, 20);
+        bgConsultas.add(radioDiaIng);
+
+        agregarAlPanel(radioDiaIng, panelConsultasPa, 10, 370, 50, 20);
 
         comboDiaIngrPacienteC = new JComboBox<>();
 
@@ -1443,11 +1454,13 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         }
 
-        agregarAlPanel(comboDiaIngrPacienteC, panelConsultasPa, 40, 370, 50, 20);
+        agregarAlPanel(comboDiaIngrPacienteC, panelConsultasPa, 70, 370, 50, 20);
 
-        JLabel txtMesIngrPacienteC = new JLabel("Mes:");
+        radioMesIng = new JRadioButton("Mes");
 
-        agregarAlPanel(txtMesIngrPacienteC, panelConsultasPa, 100, 370, 30, 20);
+        bgConsultas.add(radioMesIng);
+
+        agregarAlPanel(radioMesIng, panelConsultasPa, 140, 370, 50, 20);
 
         comboMesIngrPacienteC = new JComboBox<>();
 
@@ -1457,11 +1470,13 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         }
 
-        agregarAlPanel(comboMesIngrPacienteC, panelConsultasPa, 130, 370, 50, 20);
+        agregarAlPanel(comboMesIngrPacienteC, panelConsultasPa, 200, 370, 50, 20);
 
-        JLabel txtAñoIngrPacienteC = new JLabel("Año:");
+        radioAñoIng = new JRadioButton();
 
-        agregarAlPanel(txtAñoIngrPacienteC, panelConsultasPa, 190, 370, 30, 20);
+        bgConsultas.add(radioAñoIng);
+
+        agregarAlPanel(radioAñoIng, panelConsultasPa, 260, 370, 50, 20);
 
         comboAñoIngrPacienteC = new JComboBox<>();
 
@@ -1471,7 +1486,7 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         }
 
-        agregarAlPanel(comboAñoIngrPacienteC, panelConsultasPa, 220, 370, 70, 20);
+        agregarAlPanel(comboAñoIngrPacienteC, panelConsultasPa, 320, 370, 70, 20);
 
         btnBuscarC = new JButton("Buscar");
 
