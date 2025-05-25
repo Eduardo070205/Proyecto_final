@@ -3,7 +3,10 @@ package Controlador;
 import ConexionBD.ConexionBD;
 import Modelo.Paciente;
 
+import javax.swing.*;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class PacienteDAO {
 
@@ -92,6 +95,8 @@ public class PacienteDAO {
         );
 
     }
+
+
 
 
 }

@@ -1,5 +1,6 @@
 package Ventanas;
 
+import ConexionBD.ConexionBD;
 import Controlador.PacienteDAO;
 import Modelo.Paciente;
 import Recursos.Elementos;
@@ -8,6 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -16,6 +19,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
     JTable tabla, tablaB, tablaM;
 
     byte numDias = 1;
+
+    ConexionBD con = ConexionBD.getInstancia();
 
     PacienteDAO pacienteDAO = new PacienteDAO();
 
@@ -953,6 +958,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         btnBuscarB = new JButton("Buscar");
 
+        btnBuscarB.addActionListener(this);
+
         agregarAlPanel(btnBuscarB, panelBajasPa, 100, 450, 100, 30);
 
         btnBorrarB = new JButton("Borrar");
@@ -1221,6 +1228,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
         agregarAlPanel(comboAñoIngrPacienteM, panelModificacionesPa, 220, 370, 70, 20);
 
         btnBuscarM = new JButton("Buscar");
+
+        btnBuscarM.addActionListener(this);
 
         agregarAlPanel(btnBuscarM, panelModificacionesPa, 100, 450, 100, 30);
 
@@ -1617,21 +1626,7 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         Object componente = e.getSource();
 
-        if(componente == btnBorrarB){
 
-            //JOptionPane.showMessageDialog(this, cajaNumPacienteB.getText().toString());
-
-            if(pacienteDAO.elimniarPaciente(cajaNumPacienteB.getText().toString())){
-
-                JOptionPane.showMessageDialog(this, "Registro eliminado con exito");
-
-            }else{
-
-                JOptionPane.showMessageDialog(this, "El registro no se pudo eliminar");
-
-            }
-
-        }
 
         if(componente == btnEnviar){
 
@@ -1728,6 +1723,173 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
             }else{
 
                 JOptionPane.showMessageDialog(this, "Error en la Insercción");
+
+            }
+
+        }
+
+        if(componente == btnBuscarB){
+
+            String sql = "SELECT * FROM Pacientes WHERE Num_Paciente = ?";
+
+            ResultSet rs = con.ejecutarInstruccionSQL(sql, cajaNumPacienteB.getText());
+
+            try {
+
+                rs.next();
+
+                cajaNombrePacienteB.setText(rs.getString(2));
+
+                cajaApePatPacienteB.setText(rs.getString(3));
+
+                cajaApeMatPAcienteB.setText(rs.getString(4));
+
+                cajaCalleNumeroPacienteB.setText(rs.getString(5));
+
+                cajaColoniaPacienteB.setText(rs.getString(6));
+
+                cajaCPPacienteB.setText(rs.getString(7));
+
+                cajaEstadoPacienteB.setText(rs.getString(8));
+
+                cajaTelefonoPacienteB.setText(rs.getString(9));
+
+                String fechaNac = rs.getString(10);
+
+                String [] partesFechaNac = fechaNac.split("-");
+
+                comboAñoNacPacienteB.setSelectedItem(Short.parseShort(partesFechaNac[0]));
+
+                comboMesNacPacienteB.setSelectedItem(Short.parseShort(partesFechaNac[1]));
+
+                comboDiaNacPacienteB.setSelectedItem(Short.parseShort(partesFechaNac[2]));
+
+                String sexo = rs.getString(11);
+
+                if(sexo.equals("Hombre")){
+
+                    radioHombreB.setSelected(true);
+
+                }
+
+                if(sexo.equals("Mujer")){
+
+                    radioMujerB.setSelected(true);
+
+                }
+
+                if(sexo.equals("No binario")){
+
+                    radioNoBinarioB.setSelected(true);
+
+                }
+
+                comboEstadoCivilPacienteB.setSelectedItem(String.valueOf(rs.getString(12)));
+
+                String fechaIngreso = rs.getString(10);
+
+                String [] partesFechaIngreso = fechaIngreso.split("-");
+
+                comboAñoIngrPacienteB.setSelectedItem(Short.parseShort(partesFechaIngreso[0]));
+
+                comboMesIngrPacienteB.setSelectedItem(Short.parseShort(partesFechaIngreso[1]));
+
+                comboDiaIngrPacienteB.setSelectedItem(Short.parseShort(partesFechaIngreso[2]));
+
+            } catch (SQLException er) {
+
+                throw new RuntimeException(er);
+
+            }
+
+        }
+
+
+        if(componente == btnBorrarB){
+
+            if(pacienteDAO.elimniarPaciente(cajaNumPacienteB.getText().toString())){
+
+                JOptionPane.showMessageDialog(this, "Registro eliminado con exito");
+
+            }else{
+
+                JOptionPane.showMessageDialog(this, "El registro no se pudo eliminar");
+
+            }
+
+        }
+
+        if(componente == btnBuscarM){
+
+            String sql = "SELECT * FROM Pacientes WHERE Num_Paciente = ?";
+
+            ResultSet rs = con.ejecutarInstruccionSQL(sql, cajaNumPacienteM.getText());
+
+            try {
+
+                rs.next();
+
+                cajaNombrePacienteM.setText(rs.getString(2));
+
+                cajaApePatPacienteM.setText(rs.getString(3));
+
+                cajaApeMatPAcienteM.setText(rs.getString(4));
+
+                cajaCalleNumeroPacienteM.setText(rs.getString(5));
+
+                cajaColoniaPacienteM.setText(rs.getString(6));
+
+                cajaCPPacienteM.setText(rs.getString(7));
+
+                cajaEstadoPacienteM.setText(rs.getString(8));
+
+                cajaTelefonoPacienteM.setText(rs.getString(9));
+
+                String fechaNac = rs.getString(10);
+
+                String [] partesFechaNac = fechaNac.split("-");
+
+                comboAñoNacPacienteM.setSelectedItem(Short.parseShort(partesFechaNac[0]));
+
+                comboMesNacPacienteM.setSelectedItem(Short.parseShort(partesFechaNac[1]));
+
+                comboDiaNacPacienteM.setSelectedItem(Short.parseShort(partesFechaNac[2]));
+
+                String sexo = rs.getString(11);
+
+                if(sexo.equals("Hombre")){
+
+                    radioHombreM.setSelected(true);
+
+                }
+
+                if(sexo.equals("Mujer")){
+
+                    radioMujerM.setSelected(true);
+
+                }
+
+                if(sexo.equals("No binario")){
+
+                    radioNoBinarioM.setSelected(true);
+
+                }
+
+                comboEstadoCivilPacienteM.setSelectedItem(String.valueOf(rs.getString(12)));
+
+                String fechaIngreso = rs.getString(10);
+
+                String [] partesFechaIngreso = fechaIngreso.split("-");
+
+                comboAñoIngrPacienteM.setSelectedItem(Short.parseShort(partesFechaIngreso[0]));
+
+                comboMesIngrPacienteM.setSelectedItem(Short.parseShort(partesFechaIngreso[1]));
+
+                comboDiaIngrPacienteM.setSelectedItem(Short.parseShort(partesFechaIngreso[2]));
+
+            } catch (SQLException er) {
+
+                throw new RuntimeException(er);
 
             }
 
@@ -1977,6 +2139,9 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
         }
 
     }
+
+
+
 }
 
 
