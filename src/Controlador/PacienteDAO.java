@@ -18,18 +18,31 @@ public class PacienteDAO {
         String sql = "INSERT INTO Pacientes(Num_Paciente , Nombre , Apellido_Paterno , Apellido_Materno , Calle_Numero , Colonia , Codigo_Postal , Estado , Telefono , Fecha_Nacimieto , Sexo , Estado_Civil , Fecha_Ingreso ) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         return con.ejecutarInstruccionLMD(sql,
+
                 paciente.getNumPaciente(),
+
                 paciente.getNombre(),
+
                 paciente.getApePat(),
+
                 paciente.getApeMat(),
+
                 paciente.getCalleNumero(),
+
                 paciente.getColonia(),
+
                 paciente.getCp(),
+
                 paciente.getEstado(),
+
                 paciente.getTelefono(),
+
                 paciente.getFechaNac(),
+
                 paciente.getSexo(),
+
                 paciente.getEstadoCivil(),
+
                 paciente.getFechaIngreso()
         );
 
@@ -44,6 +57,8 @@ public class PacienteDAO {
         return con.ejecutarInstruccionLMD(sql, numPaciente);
 
     }
+
+
 
 
 }

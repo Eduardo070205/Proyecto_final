@@ -1673,7 +1673,35 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
             }
 
-            Paciente paciente = new Paciente(cajaNumPaciente.getText().toString(), cajaNombrePaciente.getText().toString(), cajaApePatPaciente.getText().toString(), cajaApeMatPAciente.getText().toString(), cajaCalleNumeroPaciente.getText().toString(), cajaColoniaPaciente.getText().toString(), cajaCPPaciente.getText().toString(), cajaEstadoPaciente.getText().toString(), cajaTelefonoPaciente.getText().toString(), fechaNac, sexo, comboEstadoCivilPaciente.getSelectedItem().toString(), fechaIngreso);
+            Paciente paciente = new Paciente(
+
+                    cajaNumPaciente.getText().toString(),
+
+                    cajaNombrePaciente.getText().toString(),
+
+                    cajaApePatPaciente.getText().toString(),
+
+                    cajaApeMatPAciente.getText().toString(),
+
+                    cajaCalleNumeroPaciente.getText().toString(),
+
+                    cajaColoniaPaciente.getText().toString(),
+
+                    cajaCPPaciente.getText().toString(),
+
+                    cajaEstadoPaciente.getText().toString(),
+
+                    cajaTelefonoPaciente.getText().toString(),
+
+                    fechaNac,
+
+                    sexo,
+
+                    comboEstadoCivilPaciente.getSelectedItem().toString(),
+
+                    fechaIngreso
+
+            );
 
             if(pacienteDAO.agregarPaciente(paciente)){
 
