@@ -1235,6 +1235,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         btnGuardarM = new JButton("Guardar");
 
+        btnGuardarM.addActionListener(this);
+
         agregarAlPanel(btnGuardarM, panelModificacionesPa, 250, 450, 100, 30);
 
         btnRestaurarM = new JButton("Restaurar");
@@ -1816,6 +1818,107 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
                 JOptionPane.showMessageDialog(this, "El registro no se pudo eliminar");
 
             }
+
+        }
+
+        if(componente == btnGuardarM){
+
+            String mes = comboMesNacPacienteM.getSelectedItem().toString();
+
+            String dia = comboDiaNacPacienteM.getSelectedItem().toString();
+
+            if(mes.length() == 1){
+
+                mes = "0" + mes;
+
+            }
+
+            if(dia.length() == 1){
+
+                dia = "0" + dia;
+
+            }
+
+            String mes2 = comboMesIngrPacienteM.getSelectedItem().toString();
+
+            String dia2 = comboDiaIngrPacienteM.getSelectedItem().toString();
+
+            if(mes2.length() == 1){
+
+                mes2 = "0" + mes2;
+
+            }
+
+            if(dia2.length() == 1){
+
+                dia2 = "0" + dia2;
+
+            }
+
+            String fechaNac = comboAñoNacPacienteM.getSelectedItem() + "-" + mes + "-" + dia;
+
+            String fechaIngreso = comboAñoIngrPacienteM.getSelectedItem() + "-" + mes2 + "-" + dia2;
+
+            String sexo = "";
+
+            if(radioHombreM.isSelected()){
+
+                sexo = "Hombre";
+
+            }
+
+            if(radioMujerM.isSelected()){
+
+                sexo = "Mujer";
+
+            }
+
+            if(radioNoBinarioM.isSelected()){
+
+                sexo = "No binario";
+
+            }
+
+            Paciente paciente = new Paciente(
+
+                    cajaNumPacienteM.getText().toString(),
+
+                    cajaNombrePacienteM.getText().toString(),
+
+                    cajaApePatPacienteM.getText().toString(),
+
+                    cajaApeMatPAcienteM.getText().toString(),
+
+                    cajaCalleNumeroPacienteM.getText().toString(),
+
+                    cajaColoniaPacienteM.getText().toString(),
+
+                    cajaCPPacienteM.getText().toString(),
+
+                    cajaEstadoPacienteM.getText().toString(),
+
+                    cajaTelefonoPacienteM.getText().toString(),
+
+                    fechaNac,
+
+                    sexo,
+
+                    comboEstadoCivilPacienteM.getSelectedItem().toString(),
+
+                    fechaIngreso
+
+            );
+
+            if(pacienteDAO.editarPaciente(paciente)){
+
+                JOptionPane.showMessageDialog(this, "Registro modificado correctamente");
+
+            }else{
+
+                JOptionPane.showMessageDialog(this, "Error en la modificacion");
+
+            }
+
 
         }
 
