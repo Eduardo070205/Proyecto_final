@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class VentanaPrincipal extends Elementos implements ActionListener {
 
-    JTable tabla, tablaB, tablaM;
+    JTable tabla, tablaB, tablaM, tablaC;
 
     byte numDias = 1;
 
@@ -348,19 +348,19 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         internalAltasPa = new JInternalFrame();
 
-        internalAltasPa.setSize(900, 800);
+        internalAltasPa.setSize(1000, 800);
 
         //============================================ ALTAS ===========================================
 
         panelAltasDiseño.setLayout(null);
 
-        panelAltasDiseño.setBounds(0,0,900, 200);
+        panelAltasDiseño.setBounds(0,0,1000, 200);
 
         panelAltasDiseño.setBackground(Color.decode("#a3d1e3"));
 
         panelAltasPa = new JPanel();
 
-        panelAltasPa.setBounds(0,200,900, 800);
+        panelAltasPa.setBounds(0,200,1000, 800);
 
         panelAltasPa.setBackground(Color.decode("#feffe9"));
 
@@ -372,7 +372,7 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         agregarAlPanel(txtTitulo, panelAltasDiseño, 50, 40, 200, 40);
 
-        agregarAlPanel(panelAltasDiseño, panelAltasPa, 0,0,900,100);
+        agregarAlPanel(panelAltasDiseño, panelAltasPa, 0,0,1000,100);
 
         JLabel txtNumPaciente = new JLabel("Numero de Paciente:");
 
@@ -669,19 +669,25 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         btnRestaurar = new JButton("Restaurar");
 
+        btnRestaurar.addActionListener(this);
+
         agregarAlPanel(btnRestaurar, panelAltasPa, 400, 450, 100, 30);
 
         btnCancelar = new JButton("Cancelar");
+
+        btnCancelar.addActionListener(this);
 
         agregarAlPanel(btnCancelar, panelAltasPa, 600, 450, 100, 30);
 
         tabla = new JTable();
 
+        actualizarTabla(tabla);
+
         JScrollPane scrollPane = new JScrollPane(tabla);
 
         scrollPane.setBackground(Color.decode("#d2e2f1"));
 
-        agregarAlPanel(scrollPane, panelAltasPa, 10, 500, 850, 200);
+        agregarAlPanel(scrollPane, panelAltasPa, 0, 500, 980, 200);
 
         internalAltasPa.add(panelAltasPa);
 
@@ -694,13 +700,13 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         panelBajasDiseño.setLayout(null);
 
-        panelBajasDiseño.setBounds(0,0,900, 200);
+        panelBajasDiseño.setBounds(0,0,1000, 200);
 
         panelBajasDiseño.setBackground(Color.decode("#a3d1e3"));
 
         panelBajasPa = new JPanel();
 
-        panelBajasPa.setBounds(0,200,900, 800);
+        panelBajasPa.setBounds(0,200,1000, 800);
 
         panelBajasPa.setBackground(Color.decode("#feffe9"));
 
@@ -712,7 +718,7 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         agregarAlPanel(txtTituloB, panelBajasDiseño, 50, 40, 200, 40);
 
-        agregarAlPanel(panelBajasDiseño, panelBajasPa, 0,0,900,100);
+        agregarAlPanel(panelBajasDiseño, panelBajasPa, 0,0,1000,100);
 
         JLabel txtNumPacienteB = new JLabel("Numero de Paciente:");
 
@@ -970,23 +976,29 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         btnRestaurarB = new JButton("Restaurar");
 
+        btnRestaurarB.addActionListener(this);
+
         agregarAlPanel(btnRestaurarB, panelBajasPa, 400, 450, 100, 30);
 
         btnCancelarB = new JButton("Cancelar");
+
+        btnCancelarB.addActionListener(this);
 
         agregarAlPanel(btnCancelarB, panelBajasPa, 550, 450, 100, 30);
 
         tablaB = new JTable();
 
-        JScrollPane scrollPaneB = new JScrollPane(tabla);
+        actualizarTabla(tablaB);
+
+        JScrollPane scrollPaneB = new JScrollPane(tablaB);
 
         scrollPaneB.setBackground(Color.decode("#d2e2f1"));
 
-        agregarAlPanel(scrollPaneB, panelBajasPa, 10, 500, 850, 200);
+        agregarAlPanel(scrollPaneB, panelBajasPa, 0, 500, 980, 200);
 
         internalBajasPa = new JInternalFrame();
 
-        internalBajasPa.setSize(900, 800);
+        internalBajasPa.setSize(1000, 800);
 
         internalBajasPa.add(panelBajasPa);
 
@@ -999,13 +1011,13 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         panelModificacionesDiseño.setLayout(null);
 
-        panelModificacionesDiseño.setBounds(0,0,900, 200);
+        panelModificacionesDiseño.setBounds(0,0,1000, 200);
 
         panelModificacionesDiseño.setBackground(Color.decode("#a3d1e3"));
 
         panelModificacionesPa = new JPanel();
 
-        panelModificacionesPa.setBounds(0,200,900, 800);
+        panelModificacionesPa.setBounds(0,200,1000, 800);
 
         panelModificacionesPa.setBackground(Color.decode("#feffe9"));
 
@@ -1017,7 +1029,7 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         agregarAlPanel(txtTituloM, panelModificacionesDiseño, 50, 40, 300, 40);
 
-        agregarAlPanel(panelModificacionesDiseño, panelModificacionesPa, 0,0,900,100);
+        agregarAlPanel(panelModificacionesDiseño, panelModificacionesPa, 0,0,1000,100);
 
         JLabel txtNumPacienteM = new JLabel("Numero de Paciente:");
 
@@ -1241,23 +1253,29 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         btnRestaurarM = new JButton("Restaurar");
 
+        btnRestaurarM.addActionListener(this);
+
         agregarAlPanel(btnRestaurarM, panelModificacionesPa, 400, 450, 100, 30);
 
         btnCancelarM = new JButton("Cancelar");
+
+        btnCancelarM.addActionListener(this);
 
         agregarAlPanel(btnCancelarM, panelModificacionesPa, 550, 450, 100, 30);
 
         tablaM = new JTable();
 
-        JScrollPane scrollPaneM = new JScrollPane(tabla);
+        actualizarTabla(tablaM);
+
+        JScrollPane scrollPaneM = new JScrollPane(tablaM);
 
         scrollPaneM.setBackground(Color.decode("#d2e2f1"));
 
-        agregarAlPanel(scrollPaneM, panelModificacionesPa, 10, 500, 850, 200);
+        agregarAlPanel(scrollPaneM, panelModificacionesPa, 0, 500, 980, 200);
 
         internalCambiosPa = new JInternalFrame();
 
-        internalCambiosPa.setSize(900, 800);
+        internalCambiosPa.setSize(1000, 800);
 
         internalCambiosPa.add(panelModificacionesPa);
 
@@ -1271,13 +1289,13 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         panelConsultasDiseño.setLayout(null);
 
-        panelConsultasDiseño.setBounds(0,0,900, 200);
+        panelConsultasDiseño.setBounds(0,0,1000, 200);
 
         panelConsultasDiseño.setBackground(Color.decode("#a3d1e3"));
 
         panelConsultasPa = new JPanel();
 
-        panelConsultasPa.setBounds(0,200,900, 800);
+        panelConsultasPa.setBounds(0,200,1000, 800);
 
         panelConsultasPa.setBackground(Color.decode("#feffe9"));
 
@@ -1289,7 +1307,7 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         agregarAlPanel(txtTituloC, panelConsultasDiseño, 50, 40, 200, 40);
 
-        agregarAlPanel(panelConsultasDiseño, panelConsultasPa, 0,0,900,100);
+        agregarAlPanel(panelConsultasDiseño, panelConsultasPa, 0,0,1000,100);
 
 
         radioTodos = new JRadioButton("Todos");
@@ -1544,33 +1562,43 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         btnBuscarC = new JButton("Buscar");
 
+        btnBuscarC.addActionListener(this);
+
         agregarAlPanel(btnBuscarC, panelConsultasPa, 200, 450, 100, 30);
 
         btnRestaurarC = new JButton("Restaurar");
+
+        btnRestaurarC.addActionListener(this);
 
         agregarAlPanel(btnRestaurarC, panelConsultasPa, 400, 450, 100, 30);
 
         btnCancelarC = new JButton("Cancelar");
 
+        btnCancelarC.addActionListener(this);
+
         agregarAlPanel(btnCancelarC, panelConsultasPa, 600, 450, 100, 30);
 
-        tabla = new JTable();
+        tablaC = new JTable();
 
-        JScrollPane scrollPaneC = new JScrollPane(tabla);
+        actualizarTabla(tablaC);
+
+        JScrollPane scrollPaneC = new JScrollPane(tablaC);
 
         scrollPaneC.setBackground(Color.decode("#d2e2f1"));
 
-        agregarAlPanel(scrollPaneC, panelConsultasPa, 10, 500, 850, 200);
+        agregarAlPanel(scrollPaneC, panelConsultasPa, 0, 500, 980, 200);
 
         internalConsultasPa = new JInternalFrame();
 
-        internalConsultasPa.setSize(900, 800);
+        internalConsultasPa.setSize(1000, 800);
 
         internalConsultasPa.add(panelConsultasPa);
 
         internalConsultasPa.setTitle("Consultas");
 
         caracteristicasInternal(internalConsultasPa);
+
+        radioTodos.setSelected(true);
 
         radioTodos.addActionListener(this);
 
@@ -1720,6 +1748,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
             if(pacienteDAO.agregarPaciente(paciente)){
 
+                actualizarTabla(tabla);
+
                 JOptionPane.showMessageDialog(this, "Registro agregado correctamente");
 
             }else{
@@ -1729,6 +1759,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
             }
 
         }
+
+
 
         if(componente == btnBuscarB){
 
@@ -1810,6 +1842,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
         if(componente == btnBorrarB){
 
             if(pacienteDAO.elimniarPaciente(cajaNumPacienteB.getText().toString())){
+
+                actualizarTabla(tablaB);
 
                 JOptionPane.showMessageDialog(this, "Registro eliminado con exito");
 
@@ -1911,6 +1945,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
             if(pacienteDAO.editarPaciente(paciente)){
 
+                actualizarTabla(tablaC);
+
                 JOptionPane.showMessageDialog(this, "Registro modificado correctamente");
 
             }else{
@@ -1995,6 +2031,17 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
                 throw new RuntimeException(er);
 
             }
+
+        }
+
+        if(componente == btnBuscarC){
+
+            if(radioTodos.isSelected()){
+
+                actualizarTabla(tablaC);
+
+            }
+
 
         }
 
