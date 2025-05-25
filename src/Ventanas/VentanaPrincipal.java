@@ -1,5 +1,7 @@
 package Ventanas;
 
+import Controlador.PacienteDAO;
+import Modelo.Paciente;
 import Recursos.Elementos;
 
 import javax.swing.*;
@@ -15,7 +17,7 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
     byte numDias = 1;
 
-
+    PacienteDAO pacienteDAO = new PacienteDAO();
 
     LocalDateTime fechaHoy = LocalDateTime.now();
 
@@ -655,6 +657,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
         comboDiaIngrPaciente.setSelectedItem((short)fechaHoy.getDayOfMonth());
 
         btnEnviar = new JButton("Enviar");
+
+        btnEnviar.addActionListener(this);
 
         agregarAlPanel(btnEnviar, panelAltasPa, 200, 450, 100, 30);
 
@@ -1610,6 +1614,78 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         Object componente = e.getSource();
+
+        if(componente == btnEnviar){
+
+            String mes = comboMesNacPaciente.getSelectedItem().toString();
+
+            String dia = comboDiaNacPaciente.getSelectedItem().toString();
+
+            if(mes.length() == 1){
+
+                mes = "0" + mes;
+
+            }
+
+            if(dia.length() == 1){
+
+                dia = "0" + dia;
+
+            }
+
+            String mes2 = comboMesIngrPaciente.getSelectedItem().toString();
+
+            String dia2 = comboDiaIngrPaciente.getSelectedItem().toString();
+
+            if(mes2.length() == 1){
+
+                mes2 = "0" + mes2;
+
+            }
+
+            if(dia2.length() == 1){
+
+                dia2 = "0" + dia2;
+
+            }
+
+            String fechaNac = comboAñoNacPaciente.getSelectedItem() + "-" + mes + "-" + dia;
+
+            String fechaIngreso = comboAñoIngrPaciente.getSelectedItem() + "-" + mes2 + "-" + dia2;
+
+            String sexo = "";
+
+            if(radioHombre.isSelected()){
+
+                sexo = "Hombre";
+
+            }
+
+            if(radioMujer.isSelected()){
+
+                sexo = "Mujer";
+
+            }
+
+            if(radioNoBinario.isSelected()){
+
+                sexo = "No binario";
+
+            }
+
+            Paciente paciente = new Paciente(cajaNumPaciente.getText().toString(), cajaNombrePaciente.getText().toString(), cajaApePatPaciente.getText().toString(), cajaApeMatPAciente.getText().toString(), cajaCalleNumeroPaciente.getText().toString(), cajaColoniaPaciente.getText().toString(), cajaCPPaciente.getText().toString(), cajaEstadoPaciente.getText().toString(), cajaTelefonoPaciente.getText().toString(), fechaNac, sexo, comboEstadoCivilPaciente.getSelectedItem().toString(), fechaIngreso);
+
+            if(pacienteDAO.agregarPaciente(paciente)){
+
+                JOptionPane.showMessageDialog(this, "Registro agregado correctamente");
+
+            }else{
+
+                JOptionPane.showMessageDialog(this, "Error en la Insercción");
+
+            }
+
+        }
 
         Component[] componentes = panelConsultasPa.getComponents();
 

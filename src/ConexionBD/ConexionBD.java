@@ -57,11 +57,11 @@ public class ConexionBD {
 
             for (int i = 0; i < parametros.length; i++) {
 
-                pstm.setObject(i + 1, parametros[i]);  // Los índices en JDBC empiezan en 1
+                pstm.setObject(i + 1, parametros[i]);
 
             }
 
-            if(pstm.executeUpdate(sql) >= 1){
+            if(pstm.executeUpdate() >= 1){
                 res = true;
             }
 
@@ -75,7 +75,7 @@ public class ConexionBD {
 
     }
 
-    public ResultSet ejecutarIstruccionSQL(String sql, Object... parametros){
+    public ResultSet ejecutarInstruccionSQL(String sql, Object... parametros){
 
         rs = null;
 
@@ -89,7 +89,7 @@ public class ConexionBD {
 
             }
 
-            rs = pstm.executeQuery(sql);
+            rs = pstm.executeQuery();
 
         } catch (SQLException e) {
 
