@@ -58,7 +58,40 @@ public class PacienteDAO {
 
     }
 
+    public boolean editarPaciente(Paciente paciente){
 
+        String sql = "UPDATE Pacientes SET Nombre = ?, Apellido_Paterno = ?, Apellido_Materno = ?, Calle_Numero = ?, Colonia = ?, Codigo_Postal = ?, Estado = ?, Telefono = ?, Fecha_Nacimieto = ?, Sexo = ?, Estado_Civil = ?, Fecha_Ingreso = ? WHERE Num_Paciente = ?";
+
+        return con.ejecutarInstruccionLMD(sql,
+
+                paciente.getNombre(),
+
+                paciente.getApePat(),
+
+                paciente.getApeMat(),
+
+                paciente.getCalleNumero(),
+
+                paciente.getColonia(),
+
+                paciente.getCp(),
+
+                paciente.getEstado(),
+
+                paciente.getTelefono(),
+
+                paciente.getFechaNac(),
+
+                paciente.getSexo(),
+
+                paciente.getEstadoCivil(),
+
+                paciente.getFechaIngreso(),
+
+                paciente.getNumPaciente()
+        );
+
+    }
 
 
 }

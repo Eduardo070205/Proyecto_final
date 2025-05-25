@@ -643,7 +643,7 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         comboDiaIngrPaciente = new JComboBox<>();
 
-        //comboDiaNacPaciente.setEnabled(false);
+
 
 
         for(int i = 1; i <= numDias; i++){
@@ -956,6 +956,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
         agregarAlPanel(btnBuscarB, panelBajasPa, 100, 450, 100, 30);
 
         btnBorrarB = new JButton("Borrar");
+
+        btnBorrarB.addActionListener(this);
 
         agregarAlPanel(btnBorrarB, panelBajasPa, 250, 450, 100, 30);
 
@@ -1614,6 +1616,22 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         Object componente = e.getSource();
+
+        if(componente == btnBorrarB){
+
+            //JOptionPane.showMessageDialog(this, cajaNumPacienteB.getText().toString());
+
+            if(pacienteDAO.elimniarPaciente(cajaNumPacienteB.getText().toString())){
+
+                JOptionPane.showMessageDialog(this, "Registro eliminado con exito");
+
+            }else{
+
+                JOptionPane.showMessageDialog(this, "El registro no se pudo eliminar");
+
+            }
+
+        }
 
         if(componente == btnEnviar){
 
