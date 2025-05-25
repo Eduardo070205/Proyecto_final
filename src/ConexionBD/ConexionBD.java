@@ -4,6 +4,8 @@ import java.sql.*;
 
 public class ConexionBD {
 
+    private static ConexionBD instancia;
+
     private Connection conexion;
 
     private PreparedStatement pstm;
@@ -36,6 +38,66 @@ public class ConexionBD {
 
         }
 
+    }
+
+    public static ConexionBD getInstancia() {
+        if (instancia == null) {
+            instancia = new ConexionBD();
+        }
+        return instancia;
+    }
+
+    public boolean ejecutarInstruccionLMD(String sql, Object... parametros){
+
+        boolean res = false;
+
+        try {
+
+            pstm = conexion.prepareStatement(sql);
+
+            for (int i = 0; i < parametros.length; i++) {
+
+                pstm.setObject(i + 1, parametros[i]);  // Los índices en JDBC empiezan en 1
+
+            }
+
+            if(pstm.executeUpdate(sql) >= 1){
+                res = true;
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+            System.out.println("Error en la ejecucion de la instruccion SQL jajajaja");
+        }
+
+        return res;
+
+    }
+
+    public ResultSet ejecutarIstruccionSQL(String sql, Object... parametros){
+
+        rs = null;
+
+        try {
+
+            pstm = conexion.prepareStatement(sql);
+
+            for (int i = 0; i < parametros.length; i++) {
+
+                pstm.setObject(i + 1, parametros[i]);
+
+            }
+
+            rs = pstm.executeQuery(sql);
+
+        } catch (SQLException e) {
+
+            System.out.println("Error en la ejecucion de la instruccion SQL");
+
+        }
+
+        return rs;
 
     }
 
