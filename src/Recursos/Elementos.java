@@ -35,7 +35,7 @@ public class Elementos extends JFrame{
             }
             if(c instanceof JRadioButton){
 
-                ((JRadioButton) c).setSelected(false);
+                ((JRadioButton) c).setSelected(true);
 
             }
 

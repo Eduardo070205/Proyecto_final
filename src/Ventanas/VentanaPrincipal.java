@@ -1851,31 +1851,7 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
         }
 
-        if(componente == btnRestaurar){
 
-            restablecer(cajaNumPaciente, cajaNombrePaciente, cajaApePatPaciente, cajaApeMatPAciente, cajaCalleNumeroPaciente, cajaColoniaPaciente, cajaCPPaciente, cajaEstadoPaciente, cajaTelefonoPaciente, comboDiaNacPaciente, comboMesNacPaciente, comboAñoNacPaciente, comboDiaIngrPaciente, comboMesIngrPaciente, comboAñoIngrPaciente, comboEstadoCivilPaciente, radioHombre, radioMujer, radioNoBinario);
-
-            radioHombre.setSelected(true);
-
-        }
-
-        if(componente == btnCancelar){
-
-            internalAltasPa.setVisible(false);
-
-            comboAñoNacPaciente.setSelectedItem((short)fechaHoy.getYear());
-
-            comboMesNacPaciente.setSelectedItem((short)fechaHoy.getMonthValue());
-
-            comboDiaNacPaciente.setSelectedItem((short)fechaHoy.getDayOfMonth());
-
-            comboAñoIngrPaciente.setSelectedItem((short)fechaHoy.getYear());
-
-            comboMesIngrPaciente.setSelectedItem((short)fechaHoy.getMonthValue());
-
-            comboDiaIngrPaciente.setSelectedItem((short)fechaHoy.getDayOfMonth());
-
-        }
 
         if(componente == btnBuscarB){
 
@@ -1969,6 +1945,33 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
             }
 
         }
+
+        if(componente == btnRestaurarB){
+
+            restablecer(cajaNumPacienteB, cajaNombrePacienteB, cajaApePatPacienteB, cajaApeMatPAcienteB, cajaCalleNumeroPacienteB, cajaColoniaPacienteB, cajaCPPacienteB, cajaEstadoPacienteB, cajaTelefonoPacienteB, comboDiaNacPacienteB, comboMesNacPacienteB, comboAñoNacPacienteB, comboDiaIngrPacienteB, comboMesIngrPacienteB, comboAñoIngrPacienteB, comboEstadoCivilPacienteB, radioHombreB);
+
+        }
+
+        if(componente == btnCancelarB){
+
+            internalBajasPa.setVisible(false);
+
+            restablecer(cajaNumPacienteB, cajaNombrePacienteB, cajaApePatPacienteB, cajaApeMatPAcienteB, cajaCalleNumeroPacienteB, cajaColoniaPacienteB, cajaCPPacienteB, cajaEstadoPacienteB, cajaTelefonoPacienteB,  comboEstadoCivilPacienteB, radioHombreB, radioMujerB, radioNoBinarioB);
+
+            comboAñoNacPacienteB.setSelectedItem((short)fechaHoy.getYear());
+
+            comboMesNacPacienteB.setSelectedItem((short)fechaHoy.getMonthValue());
+
+            comboDiaNacPacienteB.setSelectedItem((short)fechaHoy.getDayOfMonth());
+
+            comboAñoIngrPacienteB.setSelectedItem((short)fechaHoy.getYear());
+
+            comboMesIngrPacienteB.setSelectedItem((short)fechaHoy.getMonthValue());
+
+            comboDiaIngrPacienteB.setSelectedItem((short)fechaHoy.getDayOfMonth());
+
+        }
+
 
         if(componente == btnGuardarM){
 
@@ -2146,6 +2149,32 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
                 throw new RuntimeException(er);
 
             }
+
+        }
+
+        if(componente == btnRestaurarM){
+
+            restablecer(cajaNumPacienteM, cajaNombrePacienteM, cajaApePatPacienteM, cajaApeMatPAcienteM, cajaCalleNumeroPacienteM, cajaColoniaPacienteM, cajaCPPacienteM, cajaEstadoPacienteM, cajaTelefonoPacienteM, comboDiaNacPacienteM, comboMesNacPacienteM, comboAñoNacPacienteM, comboDiaIngrPacienteM, comboMesIngrPacienteM, comboAñoIngrPacienteM, comboEstadoCivilPacienteM, radioHombreM);
+
+        }
+
+        if(componente == btnCancelarM){
+
+            internalCambiosPa.setVisible(false);
+
+            restablecer(cajaNumPacienteM, cajaNombrePacienteM, cajaApePatPacienteM, cajaApeMatPAcienteM, cajaCalleNumeroPacienteM, cajaColoniaPacienteM, cajaCPPacienteM, cajaEstadoPacienteM, cajaTelefonoPacienteM,  comboEstadoCivilPacienteM, radioHombreM, radioMujerM, radioNoBinarioM);
+
+            comboAñoNacPacienteM.setSelectedItem((short)fechaHoy.getYear());
+
+            comboMesNacPacienteM.setSelectedItem((short)fechaHoy.getMonthValue());
+
+            comboDiaNacPacienteM.setSelectedItem((short)fechaHoy.getDayOfMonth());
+
+            comboAñoIngrPacienteM.setSelectedItem((short)fechaHoy.getYear());
+
+            comboMesIngrPacienteM.setSelectedItem((short)fechaHoy.getMonthValue());
+
+            comboDiaIngrPacienteM.setSelectedItem((short)fechaHoy.getDayOfMonth());
 
         }
 
