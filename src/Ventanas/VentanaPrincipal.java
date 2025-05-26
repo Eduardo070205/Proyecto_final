@@ -1400,65 +1400,6 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
         agregarAlPanel(cajaEstadoPacienteC, panelConsultasPa, 510, 180, 100, 20);
 
 
-        JLabel txtxFechaNacPacienteC = new JLabel("Fecha de nacimiento");
-
-        agregarAlPanel(txtxFechaNacPacienteC, panelConsultasPa, 10, 240, 120, 20);
-
-        radiodiaNac = new JRadioButton("Dia");
-
-        agregarAlPanel(radiodiaNac, panelConsultasPa, 10, 260, 50, 20);
-
-        bgConsultas.add(radiodiaNac);
-
-        radiosConsultas.add((radiodiaNac));
-
-        comboDiaNacPacienteC = new JComboBox<>();
-
-        for(int i = 1; i <= 30; i++){
-
-            comboDiaNacPacienteC.addItem((short)i);
-
-        }
-
-        agregarAlPanel(comboDiaNacPacienteC, panelConsultasPa, 70, 260, 50, 20);
-
-        radioMesNac = new JRadioButton("Mes");
-
-        bgConsultas.add(radioMesNac);
-
-        radiosConsultas.add((radioMesNac));
-
-        agregarAlPanel(radioMesNac, panelConsultasPa, 130, 260, 50, 20);
-
-        comboMesNacPacienteC = new JComboBox<>();
-
-
-        for(int i = 1; i <= 12; i++){
-
-            comboMesNacPacienteC.addItem((short)i);
-
-        }
-
-        agregarAlPanel(comboMesNacPacienteC, panelConsultasPa, 190, 260, 50, 20);
-
-        radioAñoNac = new JRadioButton("Año");
-
-        bgConsultas.add(radioAñoNac);
-
-        radiosConsultas.add((radioAñoNac));
-
-        agregarAlPanel(radioAñoNac, panelConsultasPa, 250, 260, 50, 20);
-
-        comboAñoNacPacienteC = new JComboBox<>();
-
-        for(int i = 2025; i >= 1900; i--){
-
-            comboAñoNacPacienteC.addItem((short)i);
-
-        }
-
-        agregarAlPanel(comboAñoNacPacienteC, panelConsultasPa, 310, 260, 70, 20);
-
         radioSexo = new JRadioButton("Sexo");
 
         bgConsultas.add(radioSexo);
@@ -1513,63 +1454,6 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
         agregarAlPanel(comboEstadoCivilPacienteC, panelConsultasPa, 110, 320, 100, 20);
 
-        JLabel txtxFechaIngrPacienteC = new JLabel("Fecha de ingreso");
-
-        agregarAlPanel(txtxFechaIngrPacienteC, panelConsultasPa, 10, 350, 120, 20);
-
-        radioDiaIng = new JRadioButton("Dia");
-
-        bgConsultas.add(radioDiaIng);
-
-        radiosConsultas.add((radioDiaIng));
-
-        agregarAlPanel(radioDiaIng, panelConsultasPa, 10, 370, 50, 20);
-
-        comboDiaIngrPacienteC = new JComboBox<>();
-
-        for(int i = 1; i <= 30; i++){
-
-            comboDiaIngrPacienteC.addItem((short)i);
-
-        }
-
-        agregarAlPanel(comboDiaIngrPacienteC, panelConsultasPa, 70, 370, 50, 20);
-
-        radioMesIng = new JRadioButton("Mes");
-
-        bgConsultas.add(radioMesIng);
-
-        radiosConsultas.add((radioMesIng));
-
-        agregarAlPanel(radioMesIng, panelConsultasPa, 140, 370, 50, 20);
-
-        comboMesIngrPacienteC = new JComboBox<>();
-
-        for(int i = 1; i <= 12; i++){
-
-            comboMesIngrPacienteC.addItem((short)i);
-
-        }
-
-        agregarAlPanel(comboMesIngrPacienteC, panelConsultasPa, 200, 370, 50, 20);
-
-        radioAñoIng = new JRadioButton();
-
-        radiosConsultas.add((radioAñoIng));
-
-        bgConsultas.add(radioAñoIng);
-
-        agregarAlPanel(radioAñoIng, panelConsultasPa, 260, 370, 50, 20);
-
-        comboAñoIngrPacienteC = new JComboBox<>();
-
-        for(int i = 2025; i >= 2010; i--){
-
-            comboAñoIngrPacienteC.addItem((short)i);
-
-        }
-
-        agregarAlPanel(comboAñoIngrPacienteC, panelConsultasPa, 320, 370, 70, 20);
 
         btnBuscarC = new JButton("Buscar");
 
@@ -1625,21 +1509,9 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
         radioEstado.addActionListener(this);
 
-        radiodiaNac.addActionListener(this);
-
-        radioMesNac.addActionListener(this);
-
-        radioAñoNac.addActionListener(this);
-
         radioSexo.addActionListener(this);
 
         radioEstadoCivil.addActionListener(this);
-
-        radioDiaIng.addActionListener(this);
-
-        radioMesIng.addActionListener(this);
-
-        radioAñoIng.addActionListener(this);
 
         //=============================================================================================
 
@@ -1929,6 +1801,32 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
         }
 
+        if(componente == btnRestaurar){
+
+            restablecer(cajaNumPaciente, cajaNombrePaciente, cajaApePatPaciente, cajaApeMatPAciente, cajaCalleNumeroPaciente, cajaColoniaPaciente, cajaCPPaciente, cajaEstadoPaciente, cajaTelefonoPaciente, comboDiaNacPaciente, comboMesNacPaciente, comboAñoNacPaciente, comboDiaIngrPaciente, comboMesIngrPaciente, comboAñoIngrPaciente, comboEstadoCivilPaciente, radioHombre);
+
+        }
+
+        if(componente == btnCancelar){
+
+            internalAltasPa.setVisible(false);
+
+            restablecer(cajaNumPaciente, cajaNombrePaciente, cajaApePatPaciente, cajaApeMatPAciente, cajaCalleNumeroPaciente, cajaColoniaPaciente, cajaCPPaciente, cajaEstadoPaciente, cajaTelefonoPaciente,  comboEstadoCivilPaciente, radioHombre, radioMujer, radioNoBinario);
+
+            comboAñoNacPaciente.setSelectedItem((short)fechaHoy.getYear());
+
+            comboMesNacPaciente.setSelectedItem((short)fechaHoy.getMonthValue());
+
+            comboDiaNacPaciente.setSelectedItem((short)fechaHoy.getDayOfMonth());
+
+            comboAñoIngrPaciente.setSelectedItem((short)fechaHoy.getYear());
+
+            comboMesIngrPaciente.setSelectedItem((short)fechaHoy.getMonthValue());
+
+            comboDiaIngrPaciente.setSelectedItem((short)fechaHoy.getDayOfMonth());
+
+        }
+
 
         if(componente == btnBorrarB){
 
@@ -2193,6 +2091,21 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
         }
 
+        if(componente == btnRestaurarC){
+
+            restablecer(cajaNombrePacienteC, cajaApePatPacienteC, cajaApeMatPAcienteC, cajaColoniaPacienteC, cajaCPPacienteC, cajaEstadoPacienteC, comboEstadoCivilPacienteC, radioHombreC);
+
+        }
+
+        if(componente == btnCancelarC){
+
+            internalConsultasPa.setVisible(false);
+
+            restablecer(cajaNombrePacienteC, cajaApePatPacienteC, cajaApeMatPAcienteC, cajaColoniaPacienteC, cajaCPPacienteC, cajaEstadoPacienteC, comboEstadoCivilPacienteC, radioHombreC, radioMujerC, radioNoBinarioC);
+
+
+        }
+
         Component[] componentes = panelConsultasPa.getComponents();
 
         int j = 0;
@@ -2250,35 +2163,11 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
             cajaEstadoPacienteC.setEnabled(true);
 
-        } else if (componente == radiodiaNac || radiodiaNac.isSelected()) {
-
-            comboDiaNacPacienteC.setEnabled(true);
-
-        } else if (componente == radioMesNac || radioMesNac.isSelected()) {
-
-            comboMesNacPacienteC.setEnabled(true);
-
-        } else if (componente == radioAñoNac || radioAñoNac.isSelected()) {
-
-            comboAñoNacPacienteC.setEnabled(true);
-
-        } else if (componente == radioEstadoCivil || radioEstadoCivil.isSelected()) {
+        }else if (componente == radioEstadoCivil || radioEstadoCivil.isSelected()) {
 
             comboEstadoCivilPacienteC.setEnabled(true);
 
-        } else if (componente == radioDiaIng || radioDiaIng.isSelected()) {
-
-            comboDiaIngrPacienteC.setEnabled(true);
-
-        } else if (componente == radioMesIng || radioMesIng.isSelected()) {
-
-            comboMesIngrPacienteC.setEnabled(true);
-
-        } else if (componente == radioAñoIng || radioAñoIng.isSelected()) {
-
-            comboAñoIngrPacienteC.setEnabled(true);
-
-        } else if(componente == radioSexo || radioSexo.isSelected()){
+        }else if(componente == radioSexo || radioSexo.isSelected()){
 
             radioHombreC.setEnabled(true);
 

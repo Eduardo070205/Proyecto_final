@@ -7,11 +7,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import javax.swing.*;
 
 public class Elementos extends JFrame{
 
-
+    LocalDateTime fechaHoy = LocalDateTime.now();
 
     ImageIcon icono;
 
@@ -172,6 +173,21 @@ public class Elementos extends JFrame{
             return false;
 
         }
+
+    }
+
+    public boolean validarFecha(int dia, int mes, int año){
+
+        if(dia <= fechaHoy.getDayOfMonth() && mes <= fechaHoy.getMonthValue() && año <= fechaHoy.getYear()){
+
+            return true;
+
+        }else {
+
+            return false;
+
+        }
+
 
     }
 
