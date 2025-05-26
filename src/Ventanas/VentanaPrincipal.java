@@ -3,6 +3,7 @@ package Ventanas;
 import ConexionBD.ConexionBD;
 import Controlador.PacienteDAO;
 import Modelo.Paciente;
+import Modelo.ResultSetTableModel;
 import Recursos.Elementos;
 
 import javax.swing.*;
@@ -562,6 +563,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         comboEstadoCivilPaciente = new JComboBox<>();
 
+        comboEstadoCivilPaciente.addItem("Elegir");
+
         comboEstadoCivilPaciente.addItem("Soltero");
 
         comboEstadoCivilPaciente.addItem("Casado");
@@ -896,6 +899,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         comboEstadoCivilPacienteB.setEnabled(false);
 
+        comboEstadoCivilPacienteB.addItem("Elegir");
+
         comboEstadoCivilPacienteB.addItem("Soltero");
 
         comboEstadoCivilPacienteB.addItem("Casado");
@@ -1178,6 +1183,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
         agregarAlPanel(txtEstadoCivilM, panelModificacionesPa, 10, 320, 100, 20);
 
         comboEstadoCivilPacienteM = new JComboBox<>();
+
+        comboEstadoCivilPacienteM.addItem("Elegir");
 
         comboEstadoCivilPacienteM.addItem("Soltero");
 
@@ -1488,6 +1495,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         comboEstadoCivilPacienteC = new JComboBox<>();
 
+        comboEstadoCivilPacienteC.addItem("Elegir");
+
         comboEstadoCivilPacienteC.addItem("Soltero");
 
         comboEstadoCivilPacienteC.addItem("Casado");
@@ -1760,7 +1769,13 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         }
 
+        if(componente == btnRestaurar){
 
+            restablecer(cajaNumPaciente, cajaNombrePaciente, cajaApePatPaciente, cajaApeMatPAciente, cajaCalleNumeroPaciente, cajaColoniaPaciente, cajaCPPaciente, cajaEstadoPaciente, cajaTelefonoPaciente, comboDiaNacPaciente, comboMesNacPaciente, comboAñoNacPaciente, comboDiaIngrPaciente, comboMesIngrPaciente, comboAñoIngrPaciente, comboEstadoCivilPaciente, radioHombre, radioMujer, radioNoBinario);
+
+            radioHombre.setSelected(true);
+
+        }
 
         if(componente == btnBuscarB){
 
@@ -2040,6 +2055,10 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
                 actualizarTabla(tablaC);
 
+            }else{
+
+                actualizarTablaFiltro(tablaC);
+
             }
 
 
@@ -2078,59 +2097,59 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         }
 
-        if (componente == radionombre) {
+        if (componente == radionombre || radionombre.isSelected()) {
 
             cajaNombrePacienteC.setEnabled(true);
 
-        } else if (componente == radioApePat) {
+        } else if (componente == radioApePat || radioApePat.isSelected()) {
 
             cajaApePatPacienteC.setEnabled(true);
 
-        } else if (componente == radioApeMat) {
+        } else if (componente == radioApeMat || radioApeMat.isSelected()) {
 
             cajaApeMatPAcienteC.setEnabled(true);
 
-        } else if (componente == radioColonia) {
+        } else if (componente == radioColonia || radioColonia.isSelected()) {
 
             cajaColoniaPacienteC.setEnabled(true);
 
-        } else if (componente == radioCP) {
+        } else if (componente == radioCP || radioCP.isSelected()) {
 
             cajaCPPacienteC.setEnabled(true);
 
-        } else if (componente == radioEstado) {
+        } else if (componente == radioEstado || radioEstado.isSelected()) {
 
             cajaEstadoPacienteC.setEnabled(true);
 
-        } else if (componente == radiodiaNac) {
+        } else if (componente == radiodiaNac || radiodiaNac.isSelected()) {
 
             comboDiaNacPacienteC.setEnabled(true);
 
-        } else if (componente == radioMesNac) {
+        } else if (componente == radioMesNac || radioMesNac.isSelected()) {
 
             comboMesNacPacienteC.setEnabled(true);
 
-        } else if (componente == radioAñoNac) {
+        } else if (componente == radioAñoNac || radioAñoNac.isSelected()) {
 
             comboAñoNacPacienteC.setEnabled(true);
 
-        } else if (componente == radioEstadoCivil) {
+        } else if (componente == radioEstadoCivil || radioEstadoCivil.isSelected()) {
 
             comboEstadoCivilPacienteC.setEnabled(true);
 
-        } else if (componente == radioDiaIng) {
+        } else if (componente == radioDiaIng || radioDiaIng.isSelected()) {
 
             comboDiaIngrPacienteC.setEnabled(true);
 
-        } else if (componente == radioMesIng) {
+        } else if (componente == radioMesIng || radioMesIng.isSelected()) {
 
             comboMesIngrPacienteC.setEnabled(true);
 
-        } else if (componente == radioAñoIng) {
+        } else if (componente == radioAñoIng || radioAñoIng.isSelected()) {
 
             comboAñoIngrPacienteC.setEnabled(true);
 
-        } else if(componente == radioSexo){
+        } else if(componente == radioSexo || radioSexo.isSelected()){
 
             radioHombreC.setEnabled(true);
 
@@ -2290,6 +2309,100 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
     }
 
+    public void actualizarTablaFiltro(JTable tabla) {
+
+        final String CONTROLADOR_JDBC = "com.mysql.cj.jdbc.Driver";
+
+        final String URL = "jdbc:mysql://localhost:3306/bd_hospital_topicos_proyecto_final";
+
+        String CONSULTA = "SELECT * FROM Pacientes";
+
+        if(radionombre.isSelected()){
+
+
+
+            CONSULTA = "SELECT * FROM Pacientes WHERE Nombre='"+cajaNombrePacienteC.getText().toString()+"'";
+
+        }
+
+        if(radioApePat.isSelected()){
+
+            CONSULTA = "SELECT * FROM Pacientes WHERE Apellido_Paterno='"+cajaApePatPacienteC.getText().toString()+"'";
+
+        }
+
+        if(radioApeMat.isSelected()){
+
+            CONSULTA = "SELECT * FROM Pacientes WHERE Apellido_Materno='"+cajaApeMatPAcienteC.getText().toString()+"'";
+
+        }
+
+        if(radioColonia.isSelected()){
+
+            CONSULTA = "SELECT * FROM Pacientes WHERE Colonia='"+cajaColoniaPacienteC.getText().toString()+"'";
+
+        }
+
+        if(radioCP.isSelected()){
+
+            CONSULTA = "SELECT * FROM Pacientes WHERE Codigo_Postal='"+cajaCPPacienteC.getText().toString()+"'";
+
+        }
+
+        if(radioEstado.isSelected()){
+
+            CONSULTA = "SELECT * FROM Pacientes WHERE Estado='"+cajaEstadoPacienteC.getText().toString()+"'";
+
+        }
+
+        if(radioSexo.isSelected()){
+
+            String sexo = "";
+
+            if(radioHombreC.isSelected()){
+
+                sexo = "Hombre";
+
+            }
+
+            if(radioMujerC.isSelected()){
+
+                sexo = "Mujer";
+
+            }
+
+            if(radioNoBinarioC.isSelected()){
+
+                sexo = "No binario";
+
+            }
+
+            CONSULTA = "SELECT * FROM Pacientes WHERE Sexo='"+sexo+"'";
+
+        }
+
+        if(radioEstadoCivil.isSelected()){
+
+            CONSULTA = "SELECT * FROM Pacientes WHERE Estado_Civil='"+comboEstadoCivilPacienteC.getSelectedItem().toString()+"'";
+
+        }
+
+        try {
+            ResultSetTableModel modelo = new ResultSetTableModel(CONTROLADOR_JDBC, URL, CONSULTA);
+
+            tabla.setModel(modelo);
+
+        } catch (SQLException e) {
+
+            throw new RuntimeException(e);
+
+        } catch (ClassNotFoundException e) {
+
+            throw new RuntimeException(e);
+
+        }
+
+    }
 
 
 }

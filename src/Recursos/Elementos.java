@@ -28,9 +28,14 @@ public class Elementos extends JFrame{
                 ((JTextField) c).setText("");
 
             }
-            if(c instanceof JPasswordField){
+            if(c instanceof JComboBox<?>){
 
-                ((JPasswordField) c).setText("");
+                ((JComboBox<?>) c).setSelectedIndex(0);
+
+            }
+            if(c instanceof JRadioButton){
+
+                ((JRadioButton) c).setSelected(false);
 
             }
 
