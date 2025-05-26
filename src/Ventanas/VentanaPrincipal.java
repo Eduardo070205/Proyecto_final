@@ -10,12 +10,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class VentanaPrincipal extends Elementos implements ActionListener {
+public class VentanaPrincipal extends Elementos implements ActionListener, KeyListener {
 
     JTable tabla, tablaB, tablaM, tablaC;
 
@@ -1639,7 +1641,78 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         radioAñoIng.addActionListener(this);
 
+        //=============================================================================================
 
+
+        cajaNumPaciente.addKeyListener(this);
+
+        cajaNombrePaciente.addKeyListener(this );
+
+        cajaApePatPaciente.addKeyListener(this);
+
+        cajaApeMatPAciente.addKeyListener(this);
+
+        cajaCPPaciente.addKeyListener(this);
+
+        cajaEstadoPaciente.addKeyListener(this);
+
+        cajaTelefonoPaciente.addKeyListener(this);
+
+        comboEstadoCivilPaciente.addKeyListener(this);
+
+
+
+        cajaNumPacienteB.addKeyListener(this);
+
+        cajaNombrePacienteB.addKeyListener(this );
+
+        cajaApePatPacienteB.addKeyListener(this);
+
+        cajaApeMatPAcienteB.addKeyListener(this);
+
+        cajaCPPacienteB.addKeyListener(this);
+
+        cajaEstadoPacienteB.addKeyListener(this);
+
+        cajaTelefonoPacienteB.addKeyListener(this);
+
+        comboEstadoCivilPacienteB.addKeyListener(this);
+
+
+
+        cajaNumPacienteM.addKeyListener(this);
+
+        cajaNombrePacienteM.addKeyListener(this );
+
+        cajaApePatPacienteM.addKeyListener(this);
+
+        cajaApeMatPAcienteM.addKeyListener(this);
+
+        cajaCPPacienteM.addKeyListener(this);
+
+        cajaEstadoPacienteM.addKeyListener(this);
+
+        cajaTelefonoPacienteM.addKeyListener(this);
+
+        comboEstadoCivilPacienteM.addKeyListener(this);
+
+
+
+        //cajaNumPacienteC.addKeyListener(this);
+
+        cajaNombrePacienteC.addKeyListener(this );
+
+        cajaApePatPacienteC.addKeyListener(this);
+
+        cajaApeMatPAcienteC.addKeyListener(this);
+
+        cajaCPPacienteC.addKeyListener(this);
+
+        cajaEstadoPacienteC.addKeyListener(this);
+
+        //cajaTelefonoPacienteC.addKeyListener(this);
+
+        comboEstadoCivilPacienteC.addKeyListener(this);
 
         //==============================================================================================
 
@@ -1783,6 +1856,24 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
             restablecer(cajaNumPaciente, cajaNombrePaciente, cajaApePatPaciente, cajaApeMatPAciente, cajaCalleNumeroPaciente, cajaColoniaPaciente, cajaCPPaciente, cajaEstadoPaciente, cajaTelefonoPaciente, comboDiaNacPaciente, comboMesNacPaciente, comboAñoNacPaciente, comboDiaIngrPaciente, comboMesIngrPaciente, comboAñoIngrPaciente, comboEstadoCivilPaciente, radioHombre, radioMujer, radioNoBinario);
 
             radioHombre.setSelected(true);
+
+        }
+
+        if(componente == btnCancelar){
+
+            internalAltasPa.setVisible(false);
+
+            comboAñoNacPaciente.setSelectedItem((short)fechaHoy.getYear());
+
+            comboMesNacPaciente.setSelectedItem((short)fechaHoy.getMonthValue());
+
+            comboDiaNacPaciente.setSelectedItem((short)fechaHoy.getDayOfMonth());
+
+            comboAñoIngrPaciente.setSelectedItem((short)fechaHoy.getYear());
+
+            comboMesIngrPaciente.setSelectedItem((short)fechaHoy.getMonthValue());
+
+            comboDiaIngrPaciente.setSelectedItem((short)fechaHoy.getDayOfMonth());
 
         }
 
@@ -2414,6 +2505,273 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
     }
 
 
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+        if(e.getSource() == cajaNumPaciente || e.getSource() == cajaNumPacienteB || e.getSource() == cajaNumPacienteM || e.getSource() == cajaNumPacienteC){
+
+            if((e.getKeyCode() >= 48 && e.getKeyCode() <= 57) || e.getKeyCode() == 8 || e.getKeyCode() == 20 || e.getKeyCode() == 16 || e.getKeyCode() == 17 || e.getKeyCode() == 18){
+
+
+
+            }else{
+
+                JOptionPane.showMessageDialog(this, "Solo puedes ingresar numeros");
+
+                cajaNumPaciente.setText("");
+
+                cajaNumPacienteB.setText("");
+
+                cajaNumPacienteM.setText("");
+
+                //cajaNumPacienteC.setText("");
+
+
+            }
+
+        }
+
+
+        if(e.getSource() == cajaNombrePaciente || e.getSource() == cajaApePatPaciente || e.getSource() == cajaApeMatPAciente || e.getSource() == cajaEstadoPaciente){
+
+            if((e.getKeyCode() >= 65 && e.getKeyCode() <= 90) || (e.getKeyCode() >= 97 && e.getKeyCode() <= 122) || e.getKeyCode() == 32 || e.getKeyCode() == 8 || e.getKeyCode() == 20 || e.getKeyCode() == 16 || e.getKeyCode() == 17 || e.getKeyCode() == 18){
+
+
+
+            }else{
+
+                JOptionPane.showMessageDialog(this, "Solo puedes ingresar letras: ");
+
+                if(e.getSource() == cajaNombrePaciente){
+
+                    cajaNombrePaciente.setText("");
+
+                }
+
+                if(e.getSource() == cajaApePatPaciente){
+
+                    cajaApePatPaciente.setText("");
+
+                }
+
+                if(e.getSource() == cajaApeMatPAciente){
+
+                    cajaApeMatPAciente.setText("");
+
+                }
+
+                if(e.getSource() == cajaEstadoPaciente){
+
+                    cajaEstadoPaciente.setText("");
+
+                }
+
+            }
+
+        }
+
+        if(e.getSource() == cajaNombrePacienteB || e.getSource() == cajaApePatPacienteB || e.getSource() == cajaApeMatPAcienteB || e.getSource() == cajaEstadoPacienteB){
+
+            if((e.getKeyCode() >= 65 && e.getKeyCode() <= 90) || (e.getKeyCode() >= 97 && e.getKeyCode() <= 122) || e.getKeyCode() == 32 || e.getKeyCode() == 8 || e.getKeyCode() == 20 || e.getKeyCode() == 16 || e.getKeyCode() == 17 || e.getKeyCode() == 18){
+
+
+
+            }else{
+
+                JOptionPane.showMessageDialog(this, "Solo puedes ingresar letras: ");
+
+                if(e.getSource() == cajaNombrePacienteB){
+
+                    cajaNombrePacienteB.setText("");
+
+                }
+
+                if(e.getSource() == cajaApePatPacienteB){
+
+                    cajaApePatPacienteB.setText("");
+
+                }
+
+                if(e.getSource() == cajaApeMatPAcienteB){
+
+                    cajaApeMatPAcienteB.setText("");
+
+                }
+
+                if(e.getSource() == cajaEstadoPacienteB){
+
+                    cajaEstadoPacienteB.setText("");
+
+                }
+
+            }
+
+        }
+
+        if(e.getSource() == cajaNombrePacienteM || e.getSource() == cajaApePatPacienteM || e.getSource() == cajaApeMatPAcienteM || e.getSource() == cajaEstadoPacienteM){
+
+            if((e.getKeyCode() >= 65 && e.getKeyCode() <= 90) || (e.getKeyCode() >= 97 && e.getKeyCode() <= 122) || e.getKeyCode() == 32 || e.getKeyCode() == 8 || e.getKeyCode() == 20 || e.getKeyCode() == 16 || e.getKeyCode() == 17 || e.getKeyCode() == 18){
+
+
+
+            }else{
+
+                JOptionPane.showMessageDialog(this, "Solo puedes ingresar letras: ");
+
+                if(e.getSource() == cajaNombrePacienteM){
+
+                    cajaNombrePacienteM.setText("");
+
+                }
+
+                if(e.getSource() == cajaApePatPacienteM){
+
+                    cajaApePatPacienteM.setText("");
+
+                }
+
+                if(e.getSource() == cajaApeMatPAcienteM){
+
+                    cajaApeMatPAcienteM.setText("");
+
+                }
+
+                if(e.getSource() == cajaEstadoPacienteM){
+
+                    cajaEstadoPacienteM.setText("");
+
+                }
+
+            }
+
+        }
+
+        if(e.getSource() == cajaNombrePacienteC || e.getSource() == cajaApePatPacienteC || e.getSource() == cajaApeMatPAcienteC || e.getSource() == cajaEstadoPacienteC){
+
+            if((e.getKeyCode() >= 65 && e.getKeyCode() <= 90) || (e.getKeyCode() >= 97 && e.getKeyCode() <= 122) || e.getKeyCode() == 32 || e.getKeyCode() == 8 || e.getKeyCode() == 20 || e.getKeyCode() == 16 || e.getKeyCode() == 17 || e.getKeyCode() == 18){
+
+
+
+            }else{
+
+                JOptionPane.showMessageDialog(this, "Solo puedes ingresar letras: ");
+
+                if(e.getSource() == cajaNombrePacienteC){
+
+                    cajaNombrePacienteC.setText("");
+
+                }
+
+                if(e.getSource() == cajaApePatPacienteC){
+
+                    cajaApePatPacienteC.setText("");
+
+                }
+
+                if(e.getSource() == cajaApeMatPAcienteC){
+
+                    cajaApeMatPAcienteC.setText("");
+
+                }
+
+                if(e.getSource() == cajaEstadoPacienteC){
+
+                    cajaEstadoPacienteC.setText("");
+
+                }
+
+            }
+
+        }
+
+
+        if(e.getSource() == cajaCPPaciente || e.getSource() == cajaTelefonoPaciente ){
+
+            if((e.getKeyCode() >= 48 && e.getKeyCode() <= 57) || e.getKeyCode() == 8 || e.getKeyCode() == 20 || e.getKeyCode() == 16 || e.getKeyCode() == 17 || e.getKeyCode() == 18){
+
+
+
+            }else{
+
+                JOptionPane.showMessageDialog(this, "Solo puedes ingresar numeros");
+
+                if(e.getSource() == cajaCPPaciente){
+
+                    cajaCPPaciente.setText("");
+
+                }
+
+                if(e.getSource() == cajaTelefonoPaciente){
+
+                    cajaTelefonoPaciente.setText("");
+
+                }
+
+
+            }
+
+        }
+
+        if(e.getSource() == cajaCPPacienteM || e.getSource() == cajaTelefonoPacienteM ){
+
+            if((e.getKeyCode() >= 48 && e.getKeyCode() <= 57) || e.getKeyCode() == 8 || e.getKeyCode() == 20 || e.getKeyCode() == 16 || e.getKeyCode() == 17 || e.getKeyCode() == 18){
+
+
+
+            }else{
+
+                JOptionPane.showMessageDialog(this, "Solo puedes ingresar numeros");
+
+                if(e.getSource() == cajaCPPacienteM){
+
+                    cajaCPPacienteM.setText("");
+
+                }
+
+                if(e.getSource() == cajaTelefonoPacienteM){
+
+                    cajaTelefonoPacienteM.setText("");
+
+                }
+
+
+            }
+
+        }
+
+        if(e.getSource() == cajaCPPacienteC ){
+
+            if((e.getKeyCode() >= 48 && e.getKeyCode() <= 57) || e.getKeyCode() == 8 || e.getKeyCode() == 20 || e.getKeyCode() == 16 || e.getKeyCode() == 17 || e.getKeyCode() == 18){
+
+
+
+            }else{
+
+                JOptionPane.showMessageDialog(this, "Solo puedes ingresar numeros");
+
+                if(e.getSource() == cajaCPPacienteC){
+
+                    cajaCPPacienteC.setText("");
+
+                }
+
+
+            }
+
+        }
+
+
+    }
 }
 
 
