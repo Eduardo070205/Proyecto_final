@@ -1669,103 +1669,112 @@ public class VentanaPrincipal extends Elementos implements ActionListener {
 
         if(componente == btnEnviar){
 
-            String mes = comboMesNacPaciente.getSelectedItem().toString();
+            if(validacion(cajaNumPaciente, cajaNombrePaciente, cajaApePatPaciente, cajaApeMatPAciente, cajaCalleNumeroPaciente, cajaColoniaPaciente, cajaCPPaciente, cajaEstadoPaciente, cajaTelefonoPaciente, comboEstadoCivilPaciente)){
 
-            String dia = comboDiaNacPaciente.getSelectedItem().toString();
+                String mes = comboMesNacPaciente.getSelectedItem().toString();
 
-            if(mes.length() == 1){
+                String dia = comboDiaNacPaciente.getSelectedItem().toString();
 
-                mes = "0" + mes;
+                if(mes.length() == 1){
 
-            }
+                    mes = "0" + mes;
 
-            if(dia.length() == 1){
+                }
 
-                dia = "0" + dia;
+                if(dia.length() == 1){
 
-            }
+                    dia = "0" + dia;
 
-            String mes2 = comboMesIngrPaciente.getSelectedItem().toString();
+                }
 
-            String dia2 = comboDiaIngrPaciente.getSelectedItem().toString();
+                String mes2 = comboMesIngrPaciente.getSelectedItem().toString();
 
-            if(mes2.length() == 1){
+                String dia2 = comboDiaIngrPaciente.getSelectedItem().toString();
 
-                mes2 = "0" + mes2;
+                if(mes2.length() == 1){
 
-            }
+                    mes2 = "0" + mes2;
 
-            if(dia2.length() == 1){
+                }
 
-                dia2 = "0" + dia2;
+                if(dia2.length() == 1){
 
-            }
+                    dia2 = "0" + dia2;
 
-            String fechaNac = comboAñoNacPaciente.getSelectedItem() + "-" + mes + "-" + dia;
+                }
 
-            String fechaIngreso = comboAñoIngrPaciente.getSelectedItem() + "-" + mes2 + "-" + dia2;
+                String fechaNac = comboAñoNacPaciente.getSelectedItem() + "-" + mes + "-" + dia;
 
-            String sexo = "";
+                String fechaIngreso = comboAñoIngrPaciente.getSelectedItem() + "-" + mes2 + "-" + dia2;
 
-            if(radioHombre.isSelected()){
+                String sexo = "";
 
-                sexo = "Hombre";
+                if(radioHombre.isSelected()){
 
-            }
+                    sexo = "Hombre";
 
-            if(radioMujer.isSelected()){
+                }
 
-                sexo = "Mujer";
+                if(radioMujer.isSelected()){
 
-            }
+                    sexo = "Mujer";
 
-            if(radioNoBinario.isSelected()){
+                }
 
-                sexo = "No binario";
+                if(radioNoBinario.isSelected()){
 
-            }
+                    sexo = "No binario";
 
-            Paciente paciente = new Paciente(
+                }
 
-                    cajaNumPaciente.getText().toString(),
+                Paciente paciente = new Paciente(
 
-                    cajaNombrePaciente.getText().toString(),
+                        cajaNumPaciente.getText().toString(),
 
-                    cajaApePatPaciente.getText().toString(),
+                        cajaNombrePaciente.getText().toString(),
 
-                    cajaApeMatPAciente.getText().toString(),
+                        cajaApePatPaciente.getText().toString(),
 
-                    cajaCalleNumeroPaciente.getText().toString(),
+                        cajaApeMatPAciente.getText().toString(),
 
-                    cajaColoniaPaciente.getText().toString(),
+                        cajaCalleNumeroPaciente.getText().toString(),
 
-                    cajaCPPaciente.getText().toString(),
+                        cajaColoniaPaciente.getText().toString(),
 
-                    cajaEstadoPaciente.getText().toString(),
+                        cajaCPPaciente.getText().toString(),
 
-                    cajaTelefonoPaciente.getText().toString(),
+                        cajaEstadoPaciente.getText().toString(),
 
-                    fechaNac,
+                        cajaTelefonoPaciente.getText().toString(),
 
-                    sexo,
+                        fechaNac,
 
-                    comboEstadoCivilPaciente.getSelectedItem().toString(),
+                        sexo,
 
-                    fechaIngreso
+                        comboEstadoCivilPaciente.getSelectedItem().toString(),
 
-            );
+                        fechaIngreso
 
-            if(pacienteDAO.agregarPaciente(paciente)){
+                );
 
-                actualizarTabla(tabla);
+                if(pacienteDAO.agregarPaciente(paciente)){
 
-                JOptionPane.showMessageDialog(this, "Registro agregado correctamente");
+                    actualizarTabla(tabla);
+
+                    JOptionPane.showMessageDialog(this, "Registro agregado correctamente");
+
+                }else{
+
+                    JOptionPane.showMessageDialog(this, "Error en la Insercción");
+
+                }
 
             }else{
 
-                JOptionPane.showMessageDialog(this, "Error en la Insercción");
+                JOptionPane.showMessageDialog(this, "Existen csampos Vacios");
 
             }
+
 
         }
 

@@ -39,7 +39,6 @@ public class Elementos extends JFrame{
 
             }
 
-
         }
 
     }
@@ -110,6 +109,67 @@ public class Elementos extends JFrame{
 
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
+
+        }
+
+    }
+
+    public boolean validacion(JComponent... componente){
+
+        boolean cajas = false, combos = false;
+
+        int contCajasVacias = 0, contComboVacios = 0;
+
+        for(JComponent c: componente){
+
+            if(c instanceof JTextField){
+
+                if(((JTextField) c).getText().isEmpty() || ((JTextField) c).getText().charAt(0) == ' '){
+
+                    contCajasVacias++;
+
+                }
+
+            }
+
+            if(contCajasVacias == 0){
+
+                cajas = true;
+
+            }else{
+
+                cajas = false;
+
+            }
+
+            if( c instanceof JComboBox){
+
+                if(((JComboBox<?>) c).getSelectedIndex() == 0){
+
+                    contComboVacios++;
+
+                }
+            }
+
+            if(contComboVacios == 0){
+
+                combos = true;
+
+            }else{
+
+                combos = false;
+
+            }
+
+        }
+
+        if((cajas && combos)){
+
+            return true;
+
+        }else{
+
+            return false;
 
         }
 
