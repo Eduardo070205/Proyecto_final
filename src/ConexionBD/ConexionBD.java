@@ -8,7 +8,6 @@ public class ConexionBD {
 
     private static ConexionBD instancia;
 
-
     private Connection conexion;
 
     private PreparedStatement pstm;
@@ -17,7 +16,7 @@ public class ConexionBD {
 
     String mensaje;
 
-    public ConexionBD() {
+    private ConexionBD() {
 
         try {
 
@@ -46,10 +45,15 @@ public class ConexionBD {
     }
 
     public static ConexionBD getInstancia() {
+
         if (instancia == null) {
+
             instancia = new ConexionBD();
+
         }
+
         return instancia;
+
     }
 
     public Connection getConexion() {
@@ -122,6 +126,7 @@ public class ConexionBD {
         return rs;
 
     }
+
 
     public static void main(String[] arg){
 

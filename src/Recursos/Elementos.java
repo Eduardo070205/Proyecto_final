@@ -12,6 +12,8 @@ import javax.swing.*;
 
 public class Elementos extends JFrame{
 
+
+
     LocalDateTime fechaHoy = LocalDateTime.now();
 
     ImageIcon icono;
@@ -103,6 +105,8 @@ public class Elementos extends JFrame{
             ResultSetTableModel modelo = new ResultSetTableModel(CONTROLADOR_JDBC, URL, CONSULTA);
 
             tabla.setModel(modelo);
+
+
 
         } catch (SQLException e) {
 

@@ -23,6 +23,10 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
     byte numDias = 1;
 
+    ResultSet rs;
+
+    String sql = "SELECT * FROM Pacientes";
+
     ConexionBD con = ConexionBD.getInstancia();
 
     PacienteDAO pacienteDAO = new PacienteDAO();
@@ -120,7 +124,10 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
     JPanel panelConsultasDiseño = new JPanel();
 
+
+
     public  VentanaPrincipal(){
+
 
         JDesktopPane desktopPaneInternals = new JDesktopPane();
 
@@ -2033,6 +2040,12 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
                         actualizarTabla(tabla);
 
+                        actualizarTabla(tablaB);
+
+                        actualizarTabla(tablaM);
+
+                        actualizarTabla(tablaC);
+
                         JOptionPane.showMessageDialog(this, "Registro agregado correctamente");
 
                     }else{
@@ -2064,9 +2077,11 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
         if(componente == btnBuscarB){
 
-            String sql = "SELECT * FROM Pacientes WHERE Num_Paciente = ?";
+            sql = "SELECT * FROM Pacientes WHERE Num_Paciente = ?";
 
             ResultSet rs = con.ejecutarInstruccionSQL(sql, cajaNumPacienteB.getText());
+
+
 
             try {
 
@@ -2132,6 +2147,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
             } catch (SQLException er) {
 
+                JOptionPane.showMessageDialog(this, "El paciente buscado no existe");
+
                 throw new RuntimeException(er);
 
             }
@@ -2181,7 +2198,13 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
                 if(pacienteDAO.elimniarPaciente(cajaNumPacienteB.getText().toString())){
 
+                    actualizarTabla(tabla);
+
                     actualizarTabla(tablaB);
+
+                    actualizarTabla(tablaM);
+
+                    actualizarTabla(tablaC);
 
                     JOptionPane.showMessageDialog(this, "Registro eliminado con exito");
 
@@ -2285,23 +2308,23 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
                 Paciente paciente = new Paciente(
 
-                        cajaNumPacienteM.getText().toString(),
+                        cajaNumPacienteM.getText(),
 
-                        cajaNombrePacienteM.getText().toString(),
+                        cajaNombrePacienteM.getText(),
 
-                        cajaApePatPacienteM.getText().toString(),
+                        cajaApePatPacienteM.getText(),
 
-                        cajaApeMatPAcienteM.getText().toString(),
+                        cajaApeMatPAcienteM.getText(),
 
-                        cajaCalleNumeroPacienteM.getText().toString(),
+                        cajaCalleNumeroPacienteM.getText(),
 
-                        cajaColoniaPacienteM.getText().toString(),
+                        cajaColoniaPacienteM.getText(),
 
-                        cajaCPPacienteM.getText().toString(),
+                        cajaCPPacienteM.getText(),
 
-                        cajaEstadoPacienteM.getText().toString(),
+                        cajaEstadoPacienteM.getText(),
 
-                        cajaTelefonoPacienteM.getText().toString(),
+                        cajaTelefonoPacienteM.getText(),
 
                         fechaNac,
 
@@ -2319,7 +2342,14 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
                     if(pacienteDAO.editarPaciente(paciente)){
 
+                        actualizarTabla(tabla);
+
+                        actualizarTabla(tablaB);
+
+                        actualizarTabla(tablaM);
+
                         actualizarTabla(tablaC);
+
 
                         JOptionPane.showMessageDialog(this, "Registro modificado correctamente");
 
@@ -2340,13 +2370,16 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
         }
 
+
+
         if(componente == btnBuscarM){
 
-            String sql = "SELECT * FROM Pacientes WHERE Num_Paciente = ?";
+            sql = "SELECT * FROM Pacientes WHERE Num_Paciente = ?";
 
-            ResultSet rs = con.ejecutarInstruccionSQL(sql, cajaNumPacienteM.getText());
+            rs = con.ejecutarInstruccionSQL(sql, cajaNumPacienteM.getText());
 
             try {
+
 
                 rs.next();
 
@@ -2409,6 +2442,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
                 comboDiaIngrPacienteM.setSelectedItem(Short.parseShort(partesFechaIngreso[2]));
 
             } catch (SQLException er) {
+
+                JOptionPane.showMessageDialog(this, "El usuario buscado no existe");
 
                 throw new RuntimeException(er);
 
