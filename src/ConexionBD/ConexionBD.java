@@ -1,16 +1,21 @@
 package ConexionBD;
 
+import javax.swing.*;
+import java.awt.*;
 import java.sql.*;
 
 public class ConexionBD {
 
     private static ConexionBD instancia;
 
+
     private Connection conexion;
 
     private PreparedStatement pstm;
 
     private ResultSet rs;
+
+    String mensaje;
 
     public ConexionBD() {
 
@@ -47,6 +52,12 @@ public class ConexionBD {
         return instancia;
     }
 
+    public Connection getConexion() {
+
+        return conexion;
+
+    }
+
     public boolean ejecutarInstruccionLMD(String sql, Object... parametros){
 
         boolean res = false;
@@ -67,11 +78,22 @@ public class ConexionBD {
 
         } catch (SQLException e) {
 
-            e.printStackTrace();
+            if (e instanceof SQLIntegrityConstraintViolationException) {
+
+                mensaje = "Error, Número de paciente repetido";
+
+            }
+
             System.out.println("Error en la ejecucion de la instruccion SQL jajajaja");
         }
 
         return res;
+
+    }
+
+    public void mostrarError(Component padre) {
+
+        JOptionPane.showMessageDialog(padre, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
 
     }
 

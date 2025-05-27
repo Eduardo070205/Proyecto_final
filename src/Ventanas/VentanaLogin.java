@@ -96,6 +96,7 @@ public class VentanaLogin extends Elementos implements ActionListener {
 
         Object componente = e.getSource();
 
+
         if(componente == btnRestablecer){
 
             restablecer(cajaUsuario, cajaContrasena);
@@ -103,6 +104,7 @@ public class VentanaLogin extends Elementos implements ActionListener {
         }
 
         if(componente == btnLogin){
+
 
             SwingUtilities.invokeLater(new Runnable() { //Siemnpre agregar ese codigo
 

@@ -7,13 +7,13 @@ import Modelo.ResultSetTableModel;
 import Recursos.Elementos;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -96,7 +96,7 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
     JRadioButton radioHombreC, radioMujerC, radioNoBinarioC;
 
-    JRadioButton radionombre, radioApePat, radioApeMat, radioColonia, radioCP, radioEstado, radiodiaNac, radioMesNac, radioAñoNac, radioDiaIng, radioMesIng, radioAñoIng, radioEstadoCivil, radioSexo, radioTodos;
+    JRadioButton radionombre, radioApePat, radioApeMat, radioColonia, radioCP, radioEstado, radioFechaNac, radioFechaIngreso, radioEstadoCivil, radioSexo, radioTodos;
 
     ArrayList<JRadioButton> radiosConsultas = new ArrayList<>();
 
@@ -607,7 +607,6 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
         comboMesIngrPaciente = new JComboBox<>();
 
-
         for(int i = 1; i <= 12; i++){
 
             comboMesIngrPaciente.addItem((short)i);
@@ -1114,39 +1113,9 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
         agregarAlPanel(txtxFechaNacPacienteM, panelModificacionesPa, 10, 240, 120, 20);
 
-        JLabel txtDiaNacPacienteM = new JLabel("Dia:");
-
-        agregarAlPanel(txtDiaNacPacienteM, panelModificacionesPa, 10, 260, 30, 20);
-
-        comboDiaNacPacienteM = new JComboBox<>();
-
-        for(int i = 1; i <= 30; i++){
-
-            comboDiaNacPacienteM.addItem((short)i);
-
-        }
-
-        agregarAlPanel(comboDiaNacPacienteM, panelModificacionesPa, 40, 260, 50, 20);
-
-        JLabel txtMesNacPacienteM = new JLabel("Mes:");
-
-        agregarAlPanel(txtMesNacPacienteM, panelModificacionesPa, 100, 260, 30, 20);
-
-        comboMesNacPacienteM = new JComboBox<>();
-
-
-
-        for(int i = 1; i <= 12; i++){
-
-            comboMesNacPacienteM.addItem((short)i);
-
-        }
-
-        agregarAlPanel(comboMesNacPacienteM, panelModificacionesPa, 130, 260, 50, 20);
-
         JLabel txtAñoNacPacienteM = new JLabel("Año:");
 
-        agregarAlPanel(txtAñoNacPacienteM, panelModificacionesPa, 190, 260, 30, 20);
+        agregarAlPanel(txtAñoNacPacienteM, panelModificacionesPa, 10, 260, 30, 20);
 
         comboAñoNacPacienteM = new JComboBox<>();
 
@@ -1156,7 +1125,74 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
         }
 
-        agregarAlPanel(comboAñoNacPacienteM, panelModificacionesPa, 220, 260, 70, 20);
+        agregarAlPanel(comboAñoNacPacienteM, panelModificacionesPa, 40, 260, 70, 20);
+
+        comboAñoNacPacienteM.setSelectedItem((short)fechaHoy.getYear());
+
+        JLabel txtMesNacPacienteM = new JLabel("Mes:");
+
+        agregarAlPanel(txtMesNacPacienteM, panelModificacionesPa, 120, 260, 30, 20);
+
+        comboMesNacPacienteM = new JComboBox<>();
+
+
+        for(int i = 1; i <= 12; i++){
+
+            comboMesNacPacienteM.addItem((short)i);
+
+        }
+
+        agregarAlPanel(comboMesNacPacienteM, panelModificacionesPa, 150, 260, 50, 20);
+
+        comboMesNacPacienteM.setSelectedItem((short)fechaHoy.getMonthValue());
+
+        comboMesNacPacienteM.addActionListener(this);
+
+        short mesSeleccionadoM = Short.parseShort(comboMesNacPacienteM.getSelectedItem().toString());
+
+        if(mesSeleccionadoM == 1 || mesSeleccionadoM == 3 || mesSeleccionadoM == 5 || mesSeleccionadoM == 7 || mesSeleccionadoM == 8 || mesSeleccionadoM == 10 || mesSeleccionadoM == 12){
+
+            numDias = 31;
+
+        } else if (mesSeleccionadoM == 2) {
+
+            short año = Short.parseShort(comboAñoNacPacienteM.getSelectedItem().toString());
+
+            if ((año % 4 == 0 && año % 100 != 0) || (año % 100 == 0 && año % 400 == 0)){
+
+                numDias = 29;
+
+            }else{
+
+                numDias = 28;
+
+            }
+
+        }else {
+
+            numDias = 30;
+
+        }
+
+        JLabel txtDiaNacPacienteM = new JLabel("Dia:");
+
+        agregarAlPanel(txtDiaNacPacienteM, panelModificacionesPa, 210, 260, 30, 20);
+
+
+        comboDiaNacPacienteM = new JComboBox<>();
+
+
+
+
+        for(int i = 1; i <= numDias; i++){
+
+            comboDiaNacPacienteM.addItem((short)i);
+
+        }
+
+        agregarAlPanel(comboDiaNacPacienteM, panelModificacionesPa, 240, 260, 50, 20);
+
+        comboDiaNacPacienteM.setSelectedItem((short)fechaHoy.getDayOfMonth());
 
         JLabel txtSexoPacienteM = new JLabel("Sexo:");
 
@@ -1206,25 +1242,28 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
         agregarAlPanel(txtxFechaIngrPacienteM, panelModificacionesPa, 10, 350, 120, 20);
 
-        JLabel txtDiaIngrPacienteM = new JLabel("Dia:");
+        JLabel txtAñoIngrPacienteM = new JLabel("Año:");
 
-        agregarAlPanel(txtDiaIngrPacienteM, panelModificacionesPa, 10, 370, 30, 20);
+        agregarAlPanel(txtAñoIngrPacienteM, panelModificacionesPa, 10, 370, 30, 20);
 
-        comboDiaIngrPacienteM = new JComboBox<>();
+        comboAñoIngrPacienteM = new JComboBox<>();
 
-        for(int i = 1; i <= 30; i++){
+        for(int i = 2025; i >= 1900; i--){
 
-            comboDiaIngrPacienteM.addItem((short)i);
+            comboAñoIngrPacienteM.addItem((short)i);
 
         }
 
-        agregarAlPanel(comboDiaIngrPacienteM, panelModificacionesPa, 40, 370, 50, 20);
+        agregarAlPanel(comboAñoIngrPacienteM, panelModificacionesPa, 40, 370, 70, 20);
+
+        comboAñoIngrPacienteM.setSelectedItem((short)fechaHoy.getYear());
 
         JLabel txtMesIngrPacienteM = new JLabel("Mes:");
 
-        agregarAlPanel(txtMesIngrPacienteM, panelModificacionesPa, 100, 370, 30, 20);
+        agregarAlPanel(txtMesIngrPacienteM, panelModificacionesPa, 120, 370, 30, 20);
 
         comboMesIngrPacienteM = new JComboBox<>();
+
 
         for(int i = 1; i <= 12; i++){
 
@@ -1232,21 +1271,55 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
         }
 
-        agregarAlPanel(comboMesIngrPacienteM, panelModificacionesPa, 130, 370, 50, 20);
+        agregarAlPanel(comboMesIngrPacienteM, panelModificacionesPa, 150, 370, 50, 20);
 
-        JLabel txtAñoIngrPacienteM = new JLabel("Año:");
+        comboMesIngrPacienteM.setSelectedItem((short)fechaHoy.getMonthValue());
 
-        agregarAlPanel(txtAñoIngrPacienteM, panelModificacionesPa, 190, 370, 30, 20);
+        comboMesIngrPacienteM.addActionListener(this);
 
-        comboAñoIngrPacienteM = new JComboBox<>();
+        short mesSeleccionadoMm = Short.parseShort(comboMesNacPacienteM.getSelectedItem().toString());
 
-        for(int i = 2025; i >= 2010; i--){
+        if(mesSeleccionadoMm == 1 || mesSeleccionadoMm == 3 || mesSeleccionadoMm == 5 || mesSeleccionadoMm == 7 || mesSeleccionadoMm == 8 || mesSeleccionadoMm == 10 || mesSeleccionadoMm == 12){
 
-            comboAñoIngrPacienteM.addItem((short)i);
+            numDias = 31;
+
+        } else if (mesSeleccionadoMm == 2) {
+
+            short año = Short.parseShort(comboAñoIngrPacienteM.getSelectedItem().toString());
+
+            if ((año % 4 == 0 && año % 100 != 0) || (año % 100 == 0 && año % 400 == 0)){
+
+                numDias = 29;
+
+            }else{
+
+                numDias = 28;
+
+            }
+
+        }else {
+
+            numDias = 30;
 
         }
 
-        agregarAlPanel(comboAñoIngrPacienteM, panelModificacionesPa, 220, 370, 70, 20);
+        JLabel txtDiaIngrPacienteM = new JLabel("Dia:");
+
+        agregarAlPanel(txtDiaIngrPacienteM, panelModificacionesPa, 210, 370, 30, 20);
+
+
+        comboDiaIngrPacienteM = new JComboBox<>();
+
+
+        for(int i = 1; i <= numDias; i++){
+
+            comboDiaIngrPacienteM.addItem((short)i);
+
+        }
+
+        agregarAlPanel(comboDiaIngrPacienteM, panelModificacionesPa, 240, 370, 50, 20);
+
+        comboDiaIngrPacienteM.setSelectedItem((short)fechaHoy.getDayOfMonth());
 
         btnBuscarM = new JButton("Buscar");
 
@@ -1399,6 +1472,97 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
         agregarAlPanel(cajaEstadoPacienteC, panelConsultasPa, 510, 180, 100, 20);
 
+        radioFechaNac = new JRadioButton("Fecha de nacimiento");
+
+        radioFechaNac.addActionListener(this);
+
+        bgConsultas.add(radioFechaNac);
+
+        radiosConsultas.add(radioFechaNac);
+
+        agregarAlPanel(radioFechaNac, panelConsultasPa, 10, 230, 150, 20);
+
+        JLabel txtAñoNacPacienteC = new JLabel("Año:");
+
+        agregarAlPanel(txtAñoNacPacienteC, panelConsultasPa, 10, 260, 30, 20);
+
+        comboAñoNacPacienteC = new JComboBox<>();
+
+        for(int i = 2025; i >= 1900; i--){
+
+            comboAñoNacPacienteC.addItem((short)i);
+
+        }
+
+        agregarAlPanel(comboAñoNacPacienteC, panelConsultasPa, 40, 260, 70, 20);
+
+        comboAñoNacPacienteC.setSelectedItem((short)fechaHoy.getYear());
+
+        JLabel txtMesNacPacienteC = new JLabel("Mes:");
+
+        agregarAlPanel(txtMesNacPacienteC, panelConsultasPa, 120, 260, 30, 20);
+
+        comboMesNacPacienteC = new JComboBox<>();
+
+
+        for(int i = 1; i <= 12; i++){
+
+            comboMesNacPacienteC.addItem((short)i);
+
+        }
+
+        agregarAlPanel(comboMesNacPacienteC, panelConsultasPa, 150, 260, 50, 20);
+
+        comboMesNacPacienteC.setSelectedItem((short)fechaHoy.getMonthValue());
+
+        comboMesNacPacienteC.addActionListener(this);
+
+        short mesSeleccionadoC = Short.parseShort(comboMesNacPacienteC.getSelectedItem().toString());
+
+        if(mesSeleccionadoC == 1 || mesSeleccionadoC == 3 || mesSeleccionadoC == 5 || mesSeleccionadoC == 7 || mesSeleccionadoC == 8 || mesSeleccionadoC == 10 || mesSeleccionadoC == 12){
+
+            numDias = 31;
+
+        } else if (mesSeleccionadoC == 2) {
+
+            short año = Short.parseShort(comboAñoNacPacienteC.getSelectedItem().toString());
+
+            if ((año % 4 == 0 && año % 100 != 0) || (año % 100 == 0 && año % 400 == 0)){
+
+                numDias = 29;
+
+            }else{
+
+                numDias = 28;
+
+            }
+
+        }else {
+
+            numDias = 30;
+
+        }
+
+        JLabel txtDiaNacPacienteC = new JLabel("Dia:");
+
+        agregarAlPanel(txtDiaNacPacienteC, panelConsultasPa, 210, 260, 30, 20);
+
+
+        comboDiaNacPacienteC = new JComboBox<>();
+
+        //comboDiaNacPaciente.setEnabled(false);
+
+
+        for(int i = 1; i <= numDias; i++){
+
+            comboDiaNacPacienteC.addItem((short)i);
+
+        }
+
+        agregarAlPanel(comboDiaNacPacienteC, panelConsultasPa, 240, 260, 50, 20);
+
+        comboDiaNacPacienteC.setSelectedItem((short)fechaHoy.getDayOfMonth());
+
 
         radioSexo = new JRadioButton("Sexo");
 
@@ -1454,6 +1618,95 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
         agregarAlPanel(comboEstadoCivilPacienteC, panelConsultasPa, 110, 320, 100, 20);
 
+        radioFechaIngreso= new JRadioButton("Fecha de ingreso");
+
+        radioFechaIngreso.addActionListener(this);
+
+        bgConsultas.add(radioFechaIngreso);
+
+        radiosConsultas.add(radioFechaIngreso);
+
+        agregarAlPanel(radioFechaIngreso, panelConsultasPa, 10, 350, 150, 20);
+
+        JLabel txtAñoIngrPacienteC = new JLabel("Año:");
+
+        agregarAlPanel(txtAñoIngrPacienteC, panelConsultasPa, 10, 380, 30, 20);
+
+        comboAñoIngrPacienteC = new JComboBox<>();
+
+        for(int i = 2025; i >= 1900; i--){
+
+            comboAñoIngrPacienteC.addItem((short)i);
+
+        }
+
+        agregarAlPanel(comboAñoIngrPacienteC, panelConsultasPa, 40, 380, 70, 20);
+
+        comboAñoIngrPacienteC.setSelectedItem((short)fechaHoy.getYear());
+
+        JLabel txtMesIngrPacienteC = new JLabel("Mes:");
+
+        agregarAlPanel(txtMesIngrPacienteC, panelConsultasPa, 120, 380, 30, 20);
+
+        comboMesIngrPacienteC = new JComboBox<>();
+
+        for(int i = 1; i <= 12; i++){
+
+            comboMesIngrPacienteC.addItem((short)i);
+
+        }
+
+        agregarAlPanel(comboMesIngrPacienteC, panelConsultasPa, 150, 380, 50, 20);
+
+        comboMesIngrPacienteC.setSelectedItem((short)fechaHoy.getMonthValue());
+
+        comboMesIngrPacienteC.addActionListener(this);
+
+        mesSeleccionadoC = Short.parseShort(comboMesIngrPacienteC.getSelectedItem().toString());
+
+        if(mesSeleccionadoC == 1 || mesSeleccionadoC == 3 || mesSeleccionadoC == 5 || mesSeleccionadoC == 7 || mesSeleccionadoC == 8 || mesSeleccionadoC == 10 || mesSeleccionadoC == 12){
+
+            numDias = 31;
+
+        } else if (mesSeleccionadoC == 2) {
+
+            short año = Short.parseShort(comboAñoIngrPacienteC.getSelectedItem().toString());
+
+            if ((año % 4 == 0 && año % 100 != 0) || (año % 100 == 0 && año % 400 == 0)){
+
+                numDias = 29;
+
+            }else{
+
+                numDias = 28;
+
+            }
+
+        }else {
+
+            numDias = 30;
+
+        }
+
+        JLabel txtDiaIngrPacienteC = new JLabel("Dia:");
+
+        agregarAlPanel(txtDiaIngrPacienteC, panelConsultasPa, 210, 380, 30, 20);
+
+
+        comboDiaIngrPacienteC = new JComboBox<>();
+
+
+
+
+        for(int i = 1; i <= numDias; i++){
+
+            comboDiaIngrPacienteC.addItem((short)i);
+
+        }
+
+        agregarAlPanel(comboDiaIngrPacienteC, panelConsultasPa, 240, 380, 50, 20);
+
+        comboDiaIngrPacienteC.setSelectedItem((short)fechaHoy.getDayOfMonth());
 
         btnBuscarC = new JButton("Buscar");
 
@@ -1586,8 +1839,15 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
         comboEstadoCivilPacienteC.addKeyListener(this);
 
-        //==============================================================================================
+        radioHombre.setSelected(true);
 
+        radioHombreB.setSelected(true);
+
+        radioHombreM.setSelected(true);
+
+        radioHombreC.setSelected(true);
+
+        //==============================================================================================
 
         desktopPaneInternals.add(internalConsultasPa);
 
@@ -1609,7 +1869,6 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
     public void actionPerformed(ActionEvent e) {
 
         Object componente = e.getSource();
-
 
 
         if(componente == btnEnviar){
@@ -1672,47 +1931,59 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
                 }
 
-                Paciente paciente = new Paciente(
+                if(validarFecha(Integer.parseInt(dia), Integer.parseInt(mes), Integer.parseInt(comboAñoNacPaciente.getSelectedItem().toString())) && validarFecha(Integer.parseInt(dia2), Integer.parseInt(mes2), Integer.parseInt(comboAñoIngrPaciente.getSelectedItem().toString()))){
 
-                        cajaNumPaciente.getText().toString(),
+                    Paciente paciente = new Paciente(
 
-                        cajaNombrePaciente.getText().toString(),
+                            cajaNumPaciente.getText().toString(),
 
-                        cajaApePatPaciente.getText().toString(),
+                            cajaNombrePaciente.getText().toString(),
 
-                        cajaApeMatPAciente.getText().toString(),
+                            cajaApePatPaciente.getText().toString(),
 
-                        cajaCalleNumeroPaciente.getText().toString(),
+                            cajaApeMatPAciente.getText().toString(),
 
-                        cajaColoniaPaciente.getText().toString(),
+                            cajaCalleNumeroPaciente.getText().toString(),
 
-                        cajaCPPaciente.getText().toString(),
+                            cajaColoniaPaciente.getText().toString(),
 
-                        cajaEstadoPaciente.getText().toString(),
+                            cajaCPPaciente.getText().toString(),
 
-                        cajaTelefonoPaciente.getText().toString(),
+                            cajaEstadoPaciente.getText().toString(),
 
-                        fechaNac,
+                            cajaTelefonoPaciente.getText().toString(),
 
-                        sexo,
+                            fechaNac,
 
-                        comboEstadoCivilPaciente.getSelectedItem().toString(),
+                            sexo,
 
-                        fechaIngreso
+                            comboEstadoCivilPaciente.getSelectedItem().toString(),
 
-                );
+                            fechaIngreso
 
-                if(pacienteDAO.agregarPaciente(paciente)){
+                    );
 
-                    actualizarTabla(tabla);
+                    if(pacienteDAO.agregarPaciente(paciente)){
 
-                    JOptionPane.showMessageDialog(this, "Registro agregado correctamente");
+                        actualizarTabla(tabla);
 
-                }else{
+                        JOptionPane.showMessageDialog(this, "Registro agregado correctamente");
 
-                    JOptionPane.showMessageDialog(this, "Error en la Insercción");
+                    }else{
+
+                        JOptionPane.showMessageDialog(this, "Error en la Insercción");
+
+                        con.mostrarError(this);
+
+
+                    }
+
+                }else {
+
+                    JOptionPane.showMessageDialog(this, "Error en las fechas");
 
                 }
+
 
             }else{
 
@@ -1809,36 +2080,50 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
         if(componente == btnCancelar){
 
-            internalAltasPa.setVisible(false);
+            int respuesta = JOptionPane.showConfirmDialog(this, "¿Quieres Salir sin guardar el registro?");
 
-            restablecer(cajaNumPaciente, cajaNombrePaciente, cajaApePatPaciente, cajaApeMatPAciente, cajaCalleNumeroPaciente, cajaColoniaPaciente, cajaCPPaciente, cajaEstadoPaciente, cajaTelefonoPaciente,  comboEstadoCivilPaciente, radioHombre, radioMujer, radioNoBinario);
+            if(respuesta == JOptionPane.YES_OPTION){
 
-            comboAñoNacPaciente.setSelectedItem((short)fechaHoy.getYear());
+                internalAltasPa.setVisible(false);
 
-            comboMesNacPaciente.setSelectedItem((short)fechaHoy.getMonthValue());
+                restablecer(cajaNumPaciente, cajaNombrePaciente, cajaApePatPaciente, cajaApeMatPAciente, cajaCalleNumeroPaciente, cajaColoniaPaciente, cajaCPPaciente, cajaEstadoPaciente, cajaTelefonoPaciente,  comboEstadoCivilPaciente, radioHombre, radioMujer, radioNoBinario);
 
-            comboDiaNacPaciente.setSelectedItem((short)fechaHoy.getDayOfMonth());
+                comboAñoNacPaciente.setSelectedItem((short)fechaHoy.getYear());
 
-            comboAñoIngrPaciente.setSelectedItem((short)fechaHoy.getYear());
+                comboMesNacPaciente.setSelectedItem((short)fechaHoy.getMonthValue());
 
-            comboMesIngrPaciente.setSelectedItem((short)fechaHoy.getMonthValue());
+                comboDiaNacPaciente.setSelectedItem((short)fechaHoy.getDayOfMonth());
 
-            comboDiaIngrPaciente.setSelectedItem((short)fechaHoy.getDayOfMonth());
+                comboAñoIngrPaciente.setSelectedItem((short)fechaHoy.getYear());
+
+                comboMesIngrPaciente.setSelectedItem((short)fechaHoy.getMonthValue());
+
+                comboDiaIngrPaciente.setSelectedItem((short)fechaHoy.getDayOfMonth());
+
+            }
+
+
 
         }
 
 
         if(componente == btnBorrarB){
 
-            if(pacienteDAO.elimniarPaciente(cajaNumPacienteB.getText().toString())){
+            int respuesta = JOptionPane.showConfirmDialog(this, "¿Estas seguro de eliminar el registro?");
 
-                actualizarTabla(tablaB);
+            if(respuesta == JOptionPane.YES_OPTION){
 
-                JOptionPane.showMessageDialog(this, "Registro eliminado con exito");
+                if(pacienteDAO.elimniarPaciente(cajaNumPacienteB.getText().toString())){
 
-            }else{
+                    actualizarTabla(tablaB);
 
-                JOptionPane.showMessageDialog(this, "El registro no se pudo eliminar");
+                    JOptionPane.showMessageDialog(this, "Registro eliminado con exito");
+
+                }else{
+
+                    JOptionPane.showMessageDialog(this, "El registro no se pudo eliminar");
+
+                }
 
             }
 
@@ -1851,6 +2136,7 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
         }
 
         if(componente == btnCancelarB){
+
 
             internalBajasPa.setVisible(false);
 
@@ -1873,103 +2159,117 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
         if(componente == btnGuardarM){
 
-            String mes = comboMesNacPacienteM.getSelectedItem().toString();
+            if(validacion(cajaNombrePacienteM, cajaApePatPacienteM, cajaApeMatPAcienteM, cajaCalleNumeroPacienteM, cajaColoniaPacienteM, cajaCPPacienteM, cajaEstadoPacienteM, cajaTelefonoPacienteM, comboEstadoCivilPacienteM)){
 
-            String dia = comboDiaNacPacienteM.getSelectedItem().toString();
+                String mes = comboMesNacPacienteM.getSelectedItem().toString();
 
-            if(mes.length() == 1){
+                String dia = comboDiaNacPacienteM.getSelectedItem().toString();
 
-                mes = "0" + mes;
+                if(mes.length() == 1){
+
+                    mes = "0" + mes;
+
+                }
+
+                if(dia.length() == 1){
+
+                    dia = "0" + dia;
+
+                }
+
+                String mes2 = comboMesIngrPacienteM.getSelectedItem().toString();
+
+                String dia2 = comboDiaIngrPacienteM.getSelectedItem().toString();
+
+                if(mes2.length() == 1){
+
+                    mes2 = "0" + mes2;
+
+                }
+
+                if(dia2.length() == 1){
+
+                    dia2 = "0" + dia2;
+
+                }
+
+                String fechaNac = comboAñoNacPacienteM.getSelectedItem() + "-" + mes + "-" + dia;
+
+                String fechaIngreso = comboAñoIngrPacienteM.getSelectedItem() + "-" + mes2 + "-" + dia2;
+
+                String sexo = "";
+
+                if(radioHombreM.isSelected()){
+
+                    sexo = "Hombre";
+
+                }
+
+                if(radioMujerM.isSelected()){
+
+                    sexo = "Mujer";
+
+                }
+
+                if(radioNoBinarioM.isSelected()){
+
+                    sexo = "No binario";
+
+                }
+
+                Paciente paciente = new Paciente(
+
+                        cajaNumPacienteM.getText().toString(),
+
+                        cajaNombrePacienteM.getText().toString(),
+
+                        cajaApePatPacienteM.getText().toString(),
+
+                        cajaApeMatPAcienteM.getText().toString(),
+
+                        cajaCalleNumeroPacienteM.getText().toString(),
+
+                        cajaColoniaPacienteM.getText().toString(),
+
+                        cajaCPPacienteM.getText().toString(),
+
+                        cajaEstadoPacienteM.getText().toString(),
+
+                        cajaTelefonoPacienteM.getText().toString(),
+
+                        fechaNac,
+
+                        sexo,
+
+                        comboEstadoCivilPacienteM.getSelectedItem().toString(),
+
+                        fechaIngreso
+
+                );
+
+                int respuesta = JOptionPane.showConfirmDialog(this, "¿Quieres guardar los cambios?");
+
+                if(respuesta == JOptionPane.YES_OPTION){
+
+                    if(pacienteDAO.editarPaciente(paciente)){
+
+                        actualizarTabla(tablaC);
+
+                        JOptionPane.showMessageDialog(this, "Registro modificado correctamente");
+
+                    }else{
+
+                        JOptionPane.showMessageDialog(this, "Error en la modificacion");
+
+                    }
+
+
+                }
 
             }
 
-            if(dia.length() == 1){
 
-                dia = "0" + dia;
 
-            }
-
-            String mes2 = comboMesIngrPacienteM.getSelectedItem().toString();
-
-            String dia2 = comboDiaIngrPacienteM.getSelectedItem().toString();
-
-            if(mes2.length() == 1){
-
-                mes2 = "0" + mes2;
-
-            }
-
-            if(dia2.length() == 1){
-
-                dia2 = "0" + dia2;
-
-            }
-
-            String fechaNac = comboAñoNacPacienteM.getSelectedItem() + "-" + mes + "-" + dia;
-
-            String fechaIngreso = comboAñoIngrPacienteM.getSelectedItem() + "-" + mes2 + "-" + dia2;
-
-            String sexo = "";
-
-            if(radioHombreM.isSelected()){
-
-                sexo = "Hombre";
-
-            }
-
-            if(radioMujerM.isSelected()){
-
-                sexo = "Mujer";
-
-            }
-
-            if(radioNoBinarioM.isSelected()){
-
-                sexo = "No binario";
-
-            }
-
-            Paciente paciente = new Paciente(
-
-                    cajaNumPacienteM.getText().toString(),
-
-                    cajaNombrePacienteM.getText().toString(),
-
-                    cajaApePatPacienteM.getText().toString(),
-
-                    cajaApeMatPAcienteM.getText().toString(),
-
-                    cajaCalleNumeroPacienteM.getText().toString(),
-
-                    cajaColoniaPacienteM.getText().toString(),
-
-                    cajaCPPacienteM.getText().toString(),
-
-                    cajaEstadoPacienteM.getText().toString(),
-
-                    cajaTelefonoPacienteM.getText().toString(),
-
-                    fechaNac,
-
-                    sexo,
-
-                    comboEstadoCivilPacienteM.getSelectedItem().toString(),
-
-                    fechaIngreso
-
-            );
-
-            if(pacienteDAO.editarPaciente(paciente)){
-
-                actualizarTabla(tablaC);
-
-                JOptionPane.showMessageDialog(this, "Registro modificado correctamente");
-
-            }else{
-
-                JOptionPane.showMessageDialog(this, "Error en la modificacion");
-
-            }
 
 
         }
@@ -2058,21 +2358,29 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
         if(componente == btnCancelarM){
 
-            internalCambiosPa.setVisible(false);
+            int respuesta = JOptionPane.showConfirmDialog(this, "¿Quieres salir?, si no has guardado los cambios se perderan");
 
-            restablecer(cajaNumPacienteM, cajaNombrePacienteM, cajaApePatPacienteM, cajaApeMatPAcienteM, cajaCalleNumeroPacienteM, cajaColoniaPacienteM, cajaCPPacienteM, cajaEstadoPacienteM, cajaTelefonoPacienteM,  comboEstadoCivilPacienteM, radioHombreM, radioMujerM, radioNoBinarioM);
+            if(respuesta == JOptionPane.YES_OPTION){
 
-            comboAñoNacPacienteM.setSelectedItem((short)fechaHoy.getYear());
+                internalCambiosPa.setVisible(false);
 
-            comboMesNacPacienteM.setSelectedItem((short)fechaHoy.getMonthValue());
+                restablecer(cajaNumPacienteM, cajaNombrePacienteM, cajaApePatPacienteM, cajaApeMatPAcienteM, cajaCalleNumeroPacienteM, cajaColoniaPacienteM, cajaCPPacienteM, cajaEstadoPacienteM, cajaTelefonoPacienteM,  comboEstadoCivilPacienteM, radioHombreM, radioMujerM, radioNoBinarioM);
 
-            comboDiaNacPacienteM.setSelectedItem((short)fechaHoy.getDayOfMonth());
+                comboAñoNacPacienteM.setSelectedItem((short)fechaHoy.getYear());
 
-            comboAñoIngrPacienteM.setSelectedItem((short)fechaHoy.getYear());
+                comboMesNacPacienteM.setSelectedItem((short)fechaHoy.getMonthValue());
 
-            comboMesIngrPacienteM.setSelectedItem((short)fechaHoy.getMonthValue());
+                comboDiaNacPacienteM.setSelectedItem((short)fechaHoy.getDayOfMonth());
 
-            comboDiaIngrPacienteM.setSelectedItem((short)fechaHoy.getDayOfMonth());
+                comboAñoIngrPacienteM.setSelectedItem((short)fechaHoy.getYear());
+
+                comboMesIngrPacienteM.setSelectedItem((short)fechaHoy.getMonthValue());
+
+                comboDiaIngrPacienteM.setSelectedItem((short)fechaHoy.getDayOfMonth());
+
+            }
+
+
 
         }
 
@@ -2174,6 +2482,26 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
             radioMujerC.setEnabled(true);
 
             radioNoBinarioC.setEnabled(true);
+
+        }else if(componente == radioFechaIngreso || radioFechaIngreso.isSelected()){
+
+            comboDiaIngrPacienteC.setEnabled(true);
+
+            comboMesIngrPacienteC.setEnabled(true);
+
+            comboAñoIngrPacienteC.setEnabled(true);
+
+        }else if(componente == radioFechaNac || radioFechaNac.isSelected()){
+
+            comboDiaNacPacienteC.setEnabled(true);
+
+            comboMesNacPacienteC.setEnabled(true);
+
+            comboAñoNacPacienteC.setEnabled(true);
+
+        }else if(componente == radioTodos || radioTodos.isSelected()){
+
+            actualizarTabla(tablaC);
 
         }
 
@@ -2290,6 +2618,158 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
         }
 
+        if(componente == comboMesNacPacienteM){
+
+            short mesSeleccionado = Short.parseShort(comboMesNacPacienteM.getSelectedItem().toString());
+
+            if(mesSeleccionado == 1 || mesSeleccionado == 3 || mesSeleccionado == 5 || mesSeleccionado == 7 || mesSeleccionado == 8 || mesSeleccionado == 10 || mesSeleccionado == 12){
+
+                numDias = 31;
+
+            } else if (mesSeleccionado == 2) {
+
+                short año = Short.parseShort(comboAñoNacPacienteM.getSelectedItem().toString());
+
+                if ((año % 4 == 0 && año % 100 != 0) || (año % 100 == 0 && año % 400 == 0)){
+
+                    numDias = 29;
+
+                }else{
+
+                    numDias = 28;
+
+                }
+
+            }else {
+
+                numDias = 30;
+
+            }
+
+            comboDiaNacPacienteM.removeAllItems();
+
+            for(int i = 1; i <= numDias; i++){
+
+                comboDiaNacPacienteM.addItem((short)i);
+
+            }
+
+        }
+
+        if(componente == comboMesIngrPacienteM){
+
+            short mesSeleccionado = Short.parseShort(comboMesIngrPacienteM.getSelectedItem().toString());
+
+            if(mesSeleccionado == 1 || mesSeleccionado == 3 || mesSeleccionado == 5 || mesSeleccionado == 7 || mesSeleccionado == 8 || mesSeleccionado == 10 || mesSeleccionado == 12){
+
+                numDias = 31;
+
+            } else if (mesSeleccionado == 2) {
+
+                short año = Short.parseShort(comboAñoIngrPacienteM.getSelectedItem().toString());
+
+                if ((año % 4 == 0 && año % 100 != 0) || (año % 100 == 0 && año % 400 == 0)){
+
+                    numDias = 29;
+
+                }else{
+
+                    numDias = 28;
+
+                }
+
+            }else {
+
+                numDias = 30;
+
+            }
+
+            comboDiaIngrPacienteM.removeAllItems();
+
+            for(int i = 1; i <= numDias; i++){
+
+                comboDiaIngrPacienteM.addItem((short)i);
+
+            }
+
+        }
+
+        if(componente == comboMesNacPacienteC){
+
+            short mesSeleccionado = Short.parseShort(comboMesNacPacienteC.getSelectedItem().toString());
+
+            if(mesSeleccionado == 1 || mesSeleccionado == 3 || mesSeleccionado == 5 || mesSeleccionado == 7 || mesSeleccionado == 8 || mesSeleccionado == 10 || mesSeleccionado == 12){
+
+                numDias = 31;
+
+            } else if (mesSeleccionado == 2) {
+
+                short año = Short.parseShort(comboAñoNacPacienteC.getSelectedItem().toString());
+
+                if ((año % 4 == 0 && año % 100 != 0) || (año % 100 == 0 && año % 400 == 0)){
+
+                    numDias = 29;
+
+                }else{
+
+                    numDias = 28;
+
+                }
+
+            }else {
+
+                numDias = 30;
+
+            }
+
+            comboDiaNacPacienteC.removeAllItems();
+
+            for(int i = 1; i <= numDias; i++){
+
+                comboDiaNacPacienteC.addItem((short)i);
+
+            }
+
+        }
+
+        if(componente == comboMesIngrPacienteC){
+
+            short mesSeleccionado = Short.parseShort(comboMesIngrPacienteC.getSelectedItem().toString());
+
+            if(mesSeleccionado == 1 || mesSeleccionado == 3 || mesSeleccionado == 5 || mesSeleccionado == 7 || mesSeleccionado == 8 || mesSeleccionado == 10 || mesSeleccionado == 12){
+
+                numDias = 31;
+
+            } else if (mesSeleccionado == 2) {
+
+                short año = Short.parseShort(comboAñoIngrPacienteC.getSelectedItem().toString());
+
+                if ((año % 4 == 0 && año % 100 != 0) || (año % 100 == 0 && año % 400 == 0)){
+
+                    numDias = 29;
+
+                }else{
+
+                    numDias = 28;
+
+                }
+
+            }else {
+
+                numDias = 30;
+
+            }
+
+            comboDiaIngrPacienteC.removeAllItems();
+
+            for(int i = 1; i <= numDias; i++){
+
+                comboDiaIngrPacienteC.addItem((short)i);
+
+            }
+
+        }
+
         if(componente == consultasPacientes){
 
             internalAltasPa.setVisible(false);
@@ -2329,96 +2809,171 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
     public void actualizarTablaFiltro(JTable tabla) {
 
-        final String CONTROLADOR_JDBC = "com.mysql.cj.jdbc.Driver";
+        new Thread(() -> {
 
-        final String URL = "jdbc:mysql://localhost:3306/bd_hospital_topicos_proyecto_final";
+            String consultaBase = "SELECT * FROM Pacientes";
 
-        String CONSULTA = "SELECT * FROM Pacientes";
+            String condicion = "";
 
-        if(radionombre.isSelected()){
+            Object valor = null;
 
+            if (radionombre.isSelected()) {
 
+                condicion = " WHERE Nombre = ?";
 
-            CONSULTA = "SELECT * FROM Pacientes WHERE Nombre='"+cajaNombrePacienteC.getText().toString()+"'";
+                valor = cajaNombrePacienteC.getText();
 
-        }
+            } else if (radioApePat.isSelected()) {
 
-        if(radioApePat.isSelected()){
+                condicion = " WHERE Apellido_Paterno = ?";
 
-            CONSULTA = "SELECT * FROM Pacientes WHERE Apellido_Paterno='"+cajaApePatPacienteC.getText().toString()+"'";
+                valor = cajaApePatPacienteC.getText();
 
-        }
+            } else if (radioApeMat.isSelected()) {
 
-        if(radioApeMat.isSelected()){
+                condicion = " WHERE Apellido_Materno = ?";
 
-            CONSULTA = "SELECT * FROM Pacientes WHERE Apellido_Materno='"+cajaApeMatPAcienteC.getText().toString()+"'";
+                valor = cajaApeMatPAcienteC.getText();
 
-        }
+            } else if (radioColonia.isSelected()) {
 
-        if(radioColonia.isSelected()){
+                condicion = " WHERE Colonia = ?";
 
-            CONSULTA = "SELECT * FROM Pacientes WHERE Colonia='"+cajaColoniaPacienteC.getText().toString()+"'";
+                valor = cajaColoniaPacienteC.getText();
 
-        }
+            } else if (radioCP.isSelected()) {
 
-        if(radioCP.isSelected()){
+                condicion = " WHERE Codigo_Postal = ?";
 
-            CONSULTA = "SELECT * FROM Pacientes WHERE Codigo_Postal='"+cajaCPPacienteC.getText().toString()+"'";
+                valor = cajaCPPacienteC.getText();
 
-        }
+            } else if (radioEstado.isSelected()) {
 
-        if(radioEstado.isSelected()){
+                condicion = " WHERE Estado = ?";
 
-            CONSULTA = "SELECT * FROM Pacientes WHERE Estado='"+cajaEstadoPacienteC.getText().toString()+"'";
+                valor = cajaEstadoPacienteC.getText();
 
-        }
+            } else if (radioSexo.isSelected()) {
 
-        if(radioSexo.isSelected()){
+                if (radioHombreC.isSelected()) {
 
-            String sexo = "";
+                    valor = "Hombre";
 
-            if(radioHombreC.isSelected()){
+                } else if (radioMujerC.isSelected()) {
 
-                sexo = "Hombre";
+                    valor = "Mujer";
+
+                } else if (radioNoBinarioC.isSelected()) {
+
+                    valor = "No binario";
+
+                }
+
+                condicion = " WHERE Sexo = ?";
+
+            } else if (radioEstadoCivil.isSelected()) {
+
+                condicion = " WHERE Estado_Civil = ?";
+
+                valor = comboEstadoCivilPacienteC.getSelectedItem().toString();
+
+            } else if (radioFechaNac.isSelected()) {
+
+                String mes = comboMesNacPacienteC.getSelectedItem().toString();
+
+                String dia = comboDiaNacPacienteC.getSelectedItem().toString();
+
+                if (mes.length() == 1){
+
+                    mes = "0" + mes;
+
+                }
+
+                if (dia.length() == 1){
+
+                    dia = "0" + dia;
+
+                }
+
+                valor = comboAñoNacPacienteC.getSelectedItem() + "-" + mes + "-" + dia;
+
+                condicion = " WHERE Fecha_Nacimieto = ?";
+
+            } else if (radioFechaIngreso.isSelected()) {
+
+                String mes = comboMesIngrPacienteC.getSelectedItem().toString();
+
+                String dia = comboDiaIngrPacienteC.getSelectedItem().toString();
+
+                if (mes.length() == 1){
+
+                    mes = "0" + mes;
+
+                }
+
+                if (dia.length() == 1){
+
+                    dia = "0" + dia;
+
+                }
+
+                valor = comboAñoIngrPacienteC.getSelectedItem() + "-" + mes + "-" + dia;
+
+                condicion = " WHERE Fecha_Ingreso = ?";
 
             }
 
-            if(radioMujerC.isSelected()){
+            String consultaFinal = consultaBase + condicion;
 
-                sexo = "Mujer";
+            try {
+
+                Connection con = ConexionBD.getInstancia().getConexion();
+
+                PreparedStatement ps = con.prepareStatement(consultaFinal);
+
+                if (valor != null) {
+
+                    ps.setObject(1, valor);
+
+                }
+
+                ResultSet rs = ps.executeQuery();
+
+                ResultSetMetaData meta = rs.getMetaData();
+
+                int columnas = meta.getColumnCount();
+
+                DefaultTableModel modelo = new DefaultTableModel();
+
+                for (int i = 1; i <= columnas; i++) {
+
+                    modelo.addColumn(meta.getColumnName(i));
+
+                }
+
+                while (rs.next()) {
+
+                    Object[] fila = new Object[columnas];
+
+                    for (int i = 1; i <= columnas; i++) {
+
+                        fila[i - 1] = rs.getObject(i);
+
+                    }
+
+                    modelo.addRow(fila);
+
+                }
+
+                tabla.setModel(modelo);
+
+            } catch (SQLException e) {
+
+                JOptionPane.showMessageDialog(this, "Error al cargar los datos");
 
             }
 
-            if(radioNoBinarioC.isSelected()){
-
-                sexo = "No binario";
-
-            }
-
-            CONSULTA = "SELECT * FROM Pacientes WHERE Sexo='"+sexo+"'";
-
-        }
-
-        if(radioEstadoCivil.isSelected()){
-
-            CONSULTA = "SELECT * FROM Pacientes WHERE Estado_Civil='"+comboEstadoCivilPacienteC.getSelectedItem().toString()+"'";
-
-        }
-
-        try {
-            ResultSetTableModel modelo = new ResultSetTableModel(CONTROLADOR_JDBC, URL, CONSULTA);
-
-            tabla.setModel(modelo);
-
-        } catch (SQLException e) {
-
-            throw new RuntimeException(e);
-
-        } catch (ClassNotFoundException e) {
-
-            throw new RuntimeException(e);
-
-        }
+        }).start();
 
     }
 
