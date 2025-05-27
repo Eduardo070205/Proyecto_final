@@ -41,11 +41,9 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
     JInternalFrame internalAltasPa, internalBajasPa, internalCambiosPa, internalConsultasPa;
 
-    JInternalFrame internalAltasDo, internalBajasDo, internalCambiosDo, internalConsultasDo;
 
-    JInternalFrame internalAltasTra, internalBajasTra, internalCambiosTra, internalConsultasTra;
 
-    JInternalFrame internalAjustes;
+    JInternalFrame internalAjustes, internalTrabajando;
 
     //================================ ALTAS =====================================================
 
@@ -176,17 +174,25 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
         altasDoctores = new JMenuItem("Agregar");
 
+        altasDoctores.addActionListener(this);
+
         menuDoctores.add(altasDoctores);
 
         bajasDoctores = new JMenuItem("Eliminar");
+
+        bajasDoctores.addActionListener(this);
 
         menuDoctores.add(bajasDoctores);
 
         cambiosDoctores = new JMenuItem("Modificar");
 
+        cambiosDoctores.addActionListener(this);
+
         menuDoctores.add(cambiosDoctores);
 
         consultasDoctores = new JMenuItem("Buscar");
+
+        consultasDoctores.addActionListener(this);
 
         menuDoctores.add(consultasDoctores);
 
@@ -194,19 +200,46 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
         altasTrabajadores= new JMenuItem("Agregar");
 
+        altasTrabajadores.addActionListener(this);
+
         menuTrabajadores.add(altasTrabajadores);
 
         bajasTrabajadores = new JMenuItem("Eliminar");
+
+        bajasTrabajadores.addActionListener(this);
 
         menuTrabajadores.add(bajasTrabajadores);
 
         cambiosTrabajadores = new JMenuItem("Modificar");
 
+        cambiosTrabajadores.addActionListener(this);
+
         menuTrabajadores.add(cambiosTrabajadores);
 
         consultasTrabajadores = new JMenuItem("Buscar");
 
+        consultasTrabajadores.addActionListener(this);
+
         menuTrabajadores.add(consultasTrabajadores);
+
+        internalTrabajando = new JInternalFrame();
+
+        internalTrabajando.setSize(1000, 800);
+
+        JPanel panelTrabajando = new JPanel();
+
+        panelTrabajando.setLayout(null);
+
+        panelTrabajando.setBounds(0,0,1000,800);
+
+        JLabel trabajando = new JLabel(asignarImagen("./img/trabajando.jpg", 800, 600));
+
+        agregarAlPanel(trabajando, panelTrabajando, 100, 100, 800, 600);
+
+        internalTrabajando.add(panelTrabajando);
+
+        caracteristicasInternal(internalTrabajando);
+
 
         barraMenu.add(menuPacientes);
 
@@ -269,6 +302,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
                     panelBajasDiseño.setBackground(Color.decode("#a3d1e3"));
 
                     panelBajasPa.setBackground(Color.decode("#feffe9"));
+
+                    toolbar.setBackground(Color.decode("#e7eaf3"));
 
                     panelModificacionesDiseño.setBackground(Color.decode("#a3d1e3"));
 
@@ -342,10 +377,21 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
             }
         });
 
+        toolbar.setBackground(Color.decode("#e7eaf3"));
+
         toolbar.add(btnAjustes);
 
         asignarPosicion(toolbar, 0, 0, 1200, 30);
 
+        JPanel panelFondo = new JPanel();
+
+        panelFondo.setBounds(0,0,1000, 800);
+
+        panelFondo.setLayout(null);
+
+        JLabel fondo = new JLabel(asignarImagen("./img/fondo.jpg", 600, 600));
+
+        agregarAlPanel(fondo, panelFondo, 200, 100, 600, 600);
 
         internalAjustes.setTitle("Ajustes");
 
@@ -374,6 +420,10 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
         txtTitulo.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 20));
 
         agregarAlPanel(txtTitulo, panelAltasDiseño, 50, 40, 200, 40);
+
+        JLabel imagenAltas = new JLabel(asignarImagen("./img/altas.png", 80, 80));
+
+        agregarAlPanel(imagenAltas, panelAltasDiseño, 900, 10, 80, 80);
 
         agregarAlPanel(panelAltasDiseño, panelAltasPa, 0,0,1000,100);
 
@@ -720,6 +770,10 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
         txtTituloB.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 20));
 
+        JLabel imagenBajas = new JLabel(asignarImagen("./img/bajas.png", 80, 80));
+
+        agregarAlPanel(imagenBajas, panelBajasDiseño, 900, 10, 80, 80);
+
         agregarAlPanel(txtTituloB, panelBajasDiseño, 50, 40, 200, 40);
 
         agregarAlPanel(panelBajasDiseño, panelBajasPa, 0,0,1000,100);
@@ -1032,6 +1086,10 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
         JLabel txtTituloM = new JLabel("Modificar un Paciente");
 
         txtTituloM.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 20));
+
+        JLabel imagenModificaciones = new JLabel(asignarImagen("./img/editar.png", 80, 80));
+
+        agregarAlPanel(imagenModificaciones, panelModificacionesDiseño, 900, 10, 80, 80);
 
         agregarAlPanel(txtTituloM, panelModificacionesDiseño, 50, 40, 300, 40);
 
@@ -1386,6 +1444,10 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
         JLabel txtTituloC = new JLabel("Buscar un Paciente");
 
         txtTituloC.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 20));
+
+        JLabel imagenConsultas = new JLabel(asignarImagen("./img/consultar.png", 80, 80));
+
+        agregarAlPanel(imagenConsultas, panelConsultasDiseño, 900, 10, 80, 80);
 
         agregarAlPanel(txtTituloC, panelConsultasDiseño, 50, 40, 200, 40);
 
@@ -1848,6 +1910,10 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
         radioHombreC.setSelected(true);
 
         //==============================================================================================
+
+        desktopPaneInternals.add(panelFondo);
+
+        desktopPaneInternals.add(internalTrabajando);
 
         desktopPaneInternals.add(internalConsultasPa);
 
@@ -2505,6 +2571,20 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
         }
 
+        if(componente == altasDoctores || componente == altasTrabajadores || componente == bajasDoctores || componente == bajasTrabajadores || componente == cambiosDoctores || componente == cambiosTrabajadores || componente == consultasDoctores || componente == consultasTrabajadores){
+
+            internalAltasPa.setVisible(false);
+
+            internalBajasPa.setVisible(false);
+
+            internalCambiosPa.setVisible(false);
+
+            internalConsultasPa.setVisible(false);
+
+            internalTrabajando.setVisible(true);
+
+        }
+
         if(componente == altasPacientes){
 
             internalCambiosPa.setVisible(false);
@@ -2512,6 +2592,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
             internalBajasPa.setVisible(false);
 
             internalConsultasPa.setVisible(false);
+
+            internalTrabajando.setVisible(false);
 
             internalAltasPa.setVisible(true);
 
@@ -2525,6 +2607,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
 
             internalConsultasPa.setVisible(false);
 
+            internalTrabajando.setVisible(false);
+
             internalBajasPa.setVisible(true);
 
 
@@ -2537,6 +2621,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
             internalBajasPa.setVisible(false);
 
             internalConsultasPa.setVisible(false);
+
+            internalTrabajando.setVisible(false);
 
             internalCambiosPa.setVisible(true);
 
@@ -2777,6 +2863,8 @@ public class VentanaPrincipal extends Elementos implements ActionListener, KeyLi
             internalBajasPa.setVisible(false);
 
             internalCambiosPa.setVisible(false);
+
+            internalTrabajando.setVisible(false);
 
             internalConsultasPa.setVisible(true);
 

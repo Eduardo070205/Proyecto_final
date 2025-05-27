@@ -96,6 +96,7 @@ public class VentanaLogin extends Elementos implements ActionListener {
 
         Object componente = e.getSource();
 
+        String contraseñaCorrecta = "12345678", usuario = "Eduardo10";
 
         if(componente == btnRestablecer){
 
@@ -106,17 +107,33 @@ public class VentanaLogin extends Elementos implements ActionListener {
         if(componente == btnLogin){
 
 
-            SwingUtilities.invokeLater(new Runnable() { //Siemnpre agregar ese codigo
+            char[] ingresada = cajaContrasena.getPassword();
 
-                @Override
-                public void run() {
+            char[] correcta = contraseñaCorrecta.toCharArray();
 
-                    new VentanaPrincipal();
+            boolean iguales = java.util.Arrays.equals(ingresada, correcta);
 
-                }
-            });
+            if (iguales  && cajaUsuario.getText().equals(usuario)) {
 
-            this.dispose();
+                SwingUtilities.invokeLater(new Runnable() { //Siemnpre agregar ese codigo
+
+                    @Override
+                    public void run() {
+
+                        new VentanaPrincipal();
+
+                    }
+                });
+
+                this.dispose();
+
+            } else {
+
+                JOptionPane.showMessageDialog(this, "La contraseña o el usiario estan incorrecto, verificalos");
+
+            }
+
+
 
         }
 
